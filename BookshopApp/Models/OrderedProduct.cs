@@ -2,7 +2,7 @@
 
 namespace BookshopApp.Models
 {
-    public class OrderedProduct : Entity<OrderedProduct>
+    public class OrderedProduct : Entity
     {
         public DateTime TimeOfBuing { get; set; }
         public int Count { get; set; }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BookshopApp.Models
 {
-    public class Order : Entity<Order>
+    public class Order : Entity
     {
         public string FinalLocation { get; set; }
         public string ReasonForCancellation { get; set; }

@@ -2,7 +2,7 @@
 
 namespace BookshopApp.Models
 {
-    public class Author : Entity<Author>
+    public class Author : Entity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

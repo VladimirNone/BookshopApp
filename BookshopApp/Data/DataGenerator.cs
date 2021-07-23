@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookshopApp.Models
+namespace BookshopApp.Data
 {
-    public abstract class Entity : IEntity
+    public class DataGenerator
     {
-        public int Id { get; set; }
     }
 }

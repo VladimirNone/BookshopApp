@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BookshopApp.Models
 {
-    public class Discount:Entity<Discount>
+    public class Discount: Entity
     {
         public double Percent { get; set; }
         public int NumberOfUses { get; set; }

@@ -29,7 +29,8 @@ namespace BookshopApp.Data
                 new OrderState() { Id = 1, NameOfState = "IsBasket" },
                 new OrderState() { Id = 2, NameOfState = "Confirmed" },
                 new OrderState() { Id = 3, NameOfState = "Completed" },
-                new OrderState() { Id = 4, NameOfState = "Cancelled" });
+                new OrderState() { Id = 4, NameOfState = "Cancelled" }
+                );
 
             base.OnModelCreating(modelBuilder);
         }

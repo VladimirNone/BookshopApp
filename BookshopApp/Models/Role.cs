@@ -3,7 +3,7 @@
 
 namespace BookshopApp.Models
 {
-    public class Role : IdentityRole<int>
+    public class Role : IdentityRole<int>, IEntity
     {
     }
 }

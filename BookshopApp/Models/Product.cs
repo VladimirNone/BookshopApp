@@ -2,7 +2,7 @@
 
 namespace BookshopApp.Models
 {
-    public class Product : Entity<Product>
+    public class Product : Entity
     {
         public string Name { get; set; }
         public short YearOfRelease { get; set; }

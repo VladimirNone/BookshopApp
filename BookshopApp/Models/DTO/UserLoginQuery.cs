@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookshopApp.Models
+namespace BookshopApp.Models.DTO
 {
-    public abstract class Entity : IEntity
+    public class UserLoginQuery
     {
-        public int Id { get; set; }
     }
 }

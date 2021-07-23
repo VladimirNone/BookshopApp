@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookshopApp.Models
 {
-    public class User : IdentityUser<int>
+    public class User : IdentityUser<int>, IEntity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
