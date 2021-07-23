@@ -9,5 +9,7 @@ namespace BookshopApp.Models
     {
         public double Percent { get; set; }
         public int NumberOfUses { get; set; }
+
+        public List<User> Owners { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace BookshopApp.Models
 {
@@ -10,5 +10,7 @@ namespace BookshopApp.Models
         public Author Author { get; set; }
         public double Price { get; set; }
         public double CountInStock { get; set; }
+
+        public List<OrderedProduct> OrderedProducts { get; set; }
     }
 }

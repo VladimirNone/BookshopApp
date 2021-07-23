@@ -44,7 +44,7 @@ namespace BookshopApp
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddTransient<DataGenerator>();
+            services.AddInfrastructure();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

@@ -15,5 +15,7 @@ namespace BookshopApp.Models
 
         public int DiscountId { get; set; }
         public Discount Discount { get; set; }
+
+        public List<Order> UserOrders { get; set; }
     }
 }
