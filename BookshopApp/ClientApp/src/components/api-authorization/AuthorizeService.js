@@ -25,7 +25,7 @@ export class AuthorizeService {
         this._isAuthenticated = !!this._username;
     }
 
-    async signup(login, password, onError) {
+    async signup(login, password, onSuccess, onError) {
         let response = await fetch(ApplicationPaths.Register, {
             method: 'POST',
             headers: {
@@ -36,6 +36,23 @@ export class AuthorizeService {
 
         if (response.status != 200)
             onError(await response.json());
+        else
+            onSuccess();
+    }
+
+    async login(login, password, onSuccess, onError) {
+        let response = await fetch(ApplicationPaths.Login, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ Login: login, Password: password })
+        });
+
+        if (response.status != 200)
+            onError(await response.json());
+        else
+            onSuccess();
     }
 
     static get instance() { return authService }

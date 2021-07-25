@@ -31,7 +31,7 @@ export class Signup extends Component {
             return;
         }
 
-        authService.signup(login, password, (error) => this.setState({ error: error }));
+        authService.signup(login, password, () => this.setState({ redirect: true }), (error) => this.setState({ error: error }));
     }
 
     handleInputChange(e) {
@@ -40,7 +40,11 @@ export class Signup extends Component {
         });
     }
 
-    renderLoginPage() {
+    render() {
+        if (this.state.redirect) {
+            return (<Redirect to={'/'} />);
+        }
+
         return (
             <Fragment>
                 <h1>Sign up</h1>
@@ -73,15 +77,6 @@ export class Signup extends Component {
                 </div>
             </Fragment>
         );
-    }
-
-    render() {
-        if (this.state.redirect) {
-            return (<Redirect to={'/'} />);
-        }
-
-
-        return this.renderLoginPage();
     }
 }
 

@@ -40,7 +40,7 @@ namespace BookshopApp.Controllers
 
         [AllowAnonymous]
         [HttpPost("Login")]
-        public async Task<ActionResult> Login([FromForm]UserLoginQuery loginQuery)
+        public async Task<ActionResult> Login(UserLoginQuery loginQuery)
         {
             var user = await _userManager.FindByEmailAsync(loginQuery.Login);
             if(user == null)

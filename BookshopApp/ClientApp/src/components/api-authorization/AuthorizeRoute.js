@@ -15,12 +15,7 @@ export default class AuthorizeRoute extends Component {
     }
 
     componentDidMount() {
-        this._subscription = authService.subscribe(() => this.authenticationChanged());
         this.populateAuthenticationState();
-    }
-
-    componentWillUnmount() {
-        authService.unsubscribe(this._subscription);
     }
 
     render() {
