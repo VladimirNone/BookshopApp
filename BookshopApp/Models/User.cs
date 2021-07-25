@@ -13,7 +13,7 @@ namespace BookshopApp.Models
         public DateTime DateOfRegistration { get; set; }
         public bool UserDeleted { get; set; }
 
-        public int DiscountId { get; set; }
+        public int? DiscountId { get; set; }
         public Discount Discount { get; set; }
 
         public List<Order> UserOrders { get; set; }

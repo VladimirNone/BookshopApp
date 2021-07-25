@@ -33,6 +33,7 @@ namespace BookshopApp
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddIdentity<User, Role>(options => {
+                options.User.RequireUniqueEmail = true; // уникальный email
                 options.Password.RequiredLength = 5;   // минимальная длина
                 options.Password.RequireNonAlphanumeric = false;   // требуются ли не алфавитно-цифровые символы
                 options.Password.RequireLowercase = false; // требуются ли символы в нижнем регистре
@@ -49,7 +50,7 @@ namespace BookshopApp
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "ClientApp1/build";
+                configuration.RootPath = "ClientApp/build";
             });
         }
 
@@ -86,7 +87,7 @@ namespace BookshopApp
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "ClientApp1";
+                spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
                 {
