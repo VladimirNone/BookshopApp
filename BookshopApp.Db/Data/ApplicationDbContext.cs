@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookshopApp.Data
+namespace BookshopApp.Db
 {
     public class ApplicationDbContext : IdentityDbContext<User, Role, int>
     {

@@ -37,7 +37,7 @@ export class Login extends Component {
         if (this.state.redirect) {
             window.location.replace(`${window.location.origin}/`);
             //need render all page, because LoginMenu don't render, when use redirect
-            return (<Redirect to={'/'} />);
+            //return (<Redirect to={'/'} />);
         }
 
         return (

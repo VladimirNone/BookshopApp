@@ -1,11 +1,10 @@
 ﻿using BookshopApp.Models;
-using BookshopApp.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookshopApp.Data.Interfaces
+namespace BookshopApp.Db
 {
     public interface IUserRepository : IRepository<User>
     {

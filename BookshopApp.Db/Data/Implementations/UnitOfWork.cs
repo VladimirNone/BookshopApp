@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BookshopApp.Data.Interfaces;
-using BookshopApp.Data;
 
-namespace BookshopApp.Data.Implementations
+namespace BookshopApp.Db.Implementations
 {
     public class UnitOfWork : IUnitOfWork
     {

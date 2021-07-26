@@ -14,9 +14,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
@@ -35,6 +33,11 @@
     <Content Remove="ClientApp\package-lock.json" />
     <Content Remove="ClientApp\package.json" />
     <Content Remove="ClientApp\public\manifest.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BookshopApp.Db\BookshopApp.Db.csproj" />
+    <ProjectReference Include="..\BookshopApp.Models\BookshopApp.Models.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

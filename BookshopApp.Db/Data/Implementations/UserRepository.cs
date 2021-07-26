@@ -1,12 +1,11 @@
-﻿using BookshopApp.Data.Interfaces;
-using BookshopApp.Models;
+﻿using BookshopApp.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookshopApp.Data.Implementations
+namespace BookshopApp.Db.Implementations
 {
     public class UserRepository : Repository<User>, IUserRepository
     {

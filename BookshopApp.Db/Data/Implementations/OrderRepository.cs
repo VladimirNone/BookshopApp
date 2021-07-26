@@ -1,11 +1,10 @@
-﻿using BookshopApp.Data.Interfaces;
-using BookshopApp.Models;
+﻿using BookshopApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookshopApp.Data.Implementations
+namespace BookshopApp.Db.Implementations
 {
     public class OrderRepository : Repository<Order>, IOrderRepository
     {

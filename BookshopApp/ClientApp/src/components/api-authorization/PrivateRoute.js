@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router';
 import authService from './AuthorizeService';
 
 
-//PrivateRoute from https://ui.dev/react-router-v5-protected-routes-authentication/
+//This PrivateRoute was based on PrivateRoute from https://ui.dev/react-router-v5-protected-routes-authentication/
 //Changed for async methods
 export class PrivateRoute extends Component {
     constructor(props) {

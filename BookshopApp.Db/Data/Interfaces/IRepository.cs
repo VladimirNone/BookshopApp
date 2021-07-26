@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookshopApp.Data.Interfaces
+namespace BookshopApp.Db
 {
     public interface IRepository<T> where T : class, IEntity
     {

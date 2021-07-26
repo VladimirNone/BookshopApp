@@ -1,4 +1,4 @@
-﻿using BookshopApp.Data;
+﻿using BookshopApp.Db;
 using BookshopApp.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -6,9 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BookshopApp.Data.Interfaces;
 
-namespace BookshopApp.Data.Implementations
+namespace BookshopApp.Db.Implementations
 {
     public abstract class Repository<T> : IRepository<T> where T: class, IEntity
     {
