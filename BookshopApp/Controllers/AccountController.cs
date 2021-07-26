@@ -45,7 +45,7 @@ namespace BookshopApp.Controllers
             var user = await _userManager.FindByEmailAsync(loginQuery.Login);
             if(user == null)
             {
-                return Problem("Wrong email");
+                return BadRequest(new[] { "Wrong email" });
             }
             //here we set and save cookie
             var result = await _signInManager.PasswordSignInAsync(user, loginQuery.Password, true, false);
@@ -54,21 +54,14 @@ namespace BookshopApp.Controllers
                 return Ok();
             }
 
-            return Problem("Wrong password");
+            return BadRequest(new[] { "Wrong password" });
         }
 
         [AllowAnonymous]
         [HttpPost("Signup")]
         public async Task<ActionResult> Signup(UserSignUpQuery signupQuery)
         {
-            if(await _unitOfWork.UsersRepository.ContainsUserByEmail(signupQuery.Email))
-            {
-                return Problem("Such email already exist");
-            }
-            if (await _unitOfWork.UsersRepository.ContainsUserByUserName(signupQuery.UserName))
-            {
-                return Problem("Such username already exist");
-            }
+            var errors = new List<string>();
 
             var user = new User { UserName = signupQuery.UserName, Email = signupQuery.Email, DateOfRegistration = DateTime.Now };
             var result = await _userManager.CreateAsync(user, signupQuery.Password);
@@ -79,7 +72,9 @@ namespace BookshopApp.Controllers
                 return Ok();
             }
 
-            return Problem("The user can't be created");
+            errors.AddRange(result.Errors.Select(h=>h.Description));
+
+            return BadRequest(errors.ToArray());
         }
 
         [HttpPost("Logout")]

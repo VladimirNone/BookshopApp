@@ -13,7 +13,7 @@ export class Login extends Component {
             login: '',
             password: '',
             success: false,
-            error: null,
+            errors: [],
             redirect: false
         };
 
@@ -24,7 +24,7 @@ export class Login extends Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        authService.login(this.state.login, this.state.password, () => this.setState({ redirect: true }), (error) => this.setState({ error: error }));
+        authService.login(this.state.login, this.state.password, () => this.setState({ redirect: true }), (errors) => this.setState({ errors: errors }));
     }
 
     handleInputChange(e) {
@@ -35,6 +35,8 @@ export class Login extends Component {
 
     render() {
         if (this.state.redirect) {
+            window.location.replace(`${window.location.origin}/`);
+            //need render all page, because LoginMenu don't render, when use redirect
             return (<Redirect to={'/'} />);
         }
 
@@ -48,7 +50,7 @@ export class Login extends Component {
                                 <h2>Use a local account to log in.</h2>
                                 <hr />
                                 <div className="text-danger"></div>
-                                    {this.state.error}
+                                    {this.state.errors.map((error, i) => <p key={i}>{error}</p>)}
                                 <div className="form-group">
                                     <label>Email</label>
                                     <input name="login" className="form-control" onChange={this.handleInputChange} value={this.state.login} />

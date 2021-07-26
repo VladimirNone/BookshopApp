@@ -33,7 +33,7 @@ export const ApplicationPaths = {
     Login: `${accountPrefix}/Login`,
     Register: `${accountPrefix}/Signup`,
     Profile: `${accountPrefix}/Profile`,
-    LogOut: `${accountPrefix}/Logout`,
+    Logout: `${accountPrefix}/Logout`,
 
     LoggedOut: `${prefix}/${LogoutActions.LoggedOut}`,
     LogOutCallback: `${prefix}/${LogoutActions.LogoutCallback}`,

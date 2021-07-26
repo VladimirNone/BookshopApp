@@ -1,4 +1,5 @@
-import { ApplicationPaths, ApplicationName } from './ApiAuthorizationConstants';
+import { ApplicationPaths } from './ApiAuthorizationConstants';
+import { $, ajax } from 'jquery';
 
 export class AuthorizeService {
     _username = null;
@@ -15,9 +16,9 @@ export class AuthorizeService {
         }
 
         let response = await fetch(ApplicationPaths.IsUserAuthenticated, { method: 'POST' });
-        const username = await response.json();
+        const user = await response.json();
 
-        return username;
+        return user;
     }
 
     updateState(user) {
@@ -34,10 +35,11 @@ export class AuthorizeService {
             body: JSON.stringify({ Email: login, UserName: login, Password: password })
         });
 
-        if (response.status != 200)
+        if (!response.ok)
             onError(await response.json());
         else
             onSuccess();
+
     }
 
     async login(login, password, onSuccess, onError) {
@@ -49,10 +51,14 @@ export class AuthorizeService {
             body: JSON.stringify({ Login: login, Password: password })
         });
 
-        if (response.status != 200)
+        if (!response.ok)
             onError(await response.json());
         else
             onSuccess();
+    }
+
+    async logout() {
+        await fetch(ApplicationPaths.Logout, {method: 'POST'});
     }
 
     static get instance() { return authService }

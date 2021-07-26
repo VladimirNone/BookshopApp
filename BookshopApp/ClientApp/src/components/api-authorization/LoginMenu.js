@@ -34,7 +34,7 @@ export class LoginMenu extends Component {
             return this.anonymousView(registerPath, loginPath);
         } else {
             const profilePath = `${ApplicationPaths.Profile}`;
-            const logoutPath = { pathname: `${ApplicationPaths.LogOut}`, state: { local: true } };
+            const logoutPath = { pathname: `${ApplicationPaths.Logout}`, state: { local: true } };
             return this.authenticatedView(userName, profilePath, logoutPath);
         }
     }

@@ -1,5 +1,6 @@
 ﻿import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router';
+import { ApplicationPaths } from './api-authorization/ApiAuthorizationConstants';
 import authService from './api-authorization/AuthorizeService';
 
 export class Signup extends Component {
@@ -10,7 +11,7 @@ export class Signup extends Component {
             password: '',
             confirmPassword: '',
             success: false,
-            error: null,
+            errors: [],
             redirect: false
         };
 
@@ -26,12 +27,12 @@ export class Signup extends Component {
         const login = this.state.login;
 
         if (password !== confirmPassword) {
-            this.setState({ error: "You must write the same passwords" })
+            this.setState({ errors: ["You must write the same passwords"] })
             this.setState({ login: '', password: '', confirmPassword: '' });
             return;
         }
 
-        authService.signup(login, password, () => this.setState({ redirect: true }), (error) => this.setState({ error: error }));
+        authService.signup(login, password, () => this.setState({ redirect: true }), (errors) => this.setState({ errors: errors }));
     }
 
     handleInputChange(e) {
@@ -42,7 +43,7 @@ export class Signup extends Component {
 
     render() {
         if (this.state.redirect) {
-            return (<Redirect to={'/'} />);
+            return (<Redirect to={ApplicationPaths.Login} />);
         }
 
         return (
@@ -54,7 +55,7 @@ export class Signup extends Component {
                             <h2>Create a new account.</h2>
                             <hr />
                             <div className="text-danger">
-                                {this.state.error}
+                                {this.state.errors.map((error,i) => <p key={i}>{error}</p>)}
                             </div>
                             <div className="form-group">
                                 <label>Login</label>
