@@ -1,4 +1,6 @@
+using AutoMapper;
 using BookshopApp.Db;
+using BookshopApp.Db.Mapper;
 using BookshopApp.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -44,6 +46,8 @@ namespace BookshopApp
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddAutoMapper(typeof(MapperProfile));
 
             services.AddInfrastructure();
 

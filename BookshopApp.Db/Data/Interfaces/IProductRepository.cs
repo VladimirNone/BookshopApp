@@ -8,6 +8,6 @@ namespace BookshopApp.Db
 {
     public interface IProductRepository : IRepository<Product>
     {
-        Task<Product[]> GetProducts(int page, int count);
+        Task<Product[]> GetProductsAsync(int page, int count);
     }
 }

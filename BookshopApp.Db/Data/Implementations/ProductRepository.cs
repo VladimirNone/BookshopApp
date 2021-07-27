@@ -14,7 +14,10 @@ namespace BookshopApp.Db.Implementations
         {
         }
 
-        public async Task<Product[]> GetProducts(int page, int count)
-            => await DbSet.AsNoTracking().Where(h => h.Deleted == false).Skip(page * count).Take(count).ToArrayAsync();
+        public async Task<Product[]> GetProductsAsync(int page, int count)
+            => await DbSet.Include(h=>h.Author).Where(h => h.Deleted == false).Skip(page * count).Take(count).AsNoTracking().ToArrayAsync();
+
+        public override async Task<Product> GetEntityAsync(int id)
+            => await DbSet.Include(h => h.Author).Where(h => h.Deleted == false).AsNoTracking().FirstOrDefaultAsync();
     }
 }
