@@ -1,8 +1,7 @@
-import { ApplicationPaths } from './ApiAuthorizationConstants';
-import { $, ajax } from 'jquery';
+import { ApplicationPaths } from './ApiConstants';
 
 export class AuthorizeService {
-    _username = null;
+    _user = null;
     _isAuthenticated = false;
 
     async isAuthenticated() {
@@ -11,19 +10,21 @@ export class AuthorizeService {
     }
 
     async getUser() {
-        if (this._username) {
-            return this._username;
+        if (this._user) {
+            return this._user;
         }
 
         let response = await fetch(ApplicationPaths.IsUserAuthenticated, { method: 'POST' });
         const user = await response.json();
 
+        this.updateState(user);
+
         return user;
     }
 
     updateState(user) {
-        this._username = user.username;
-        this._isAuthenticated = !!this._username;
+        this._user = user;
+        this._isAuthenticated = !!this._user.username;
     }
 
     async signup(login, password, onSuccess, onError) {

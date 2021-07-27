@@ -10,7 +10,7 @@ import { PrivateRoute } from './components/api-authorization/PrivateRoute';
 import { Basket } from './components/Basket';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';*/
-import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
+import { ApplicationPaths } from './components/api-authorization/ApiConstants';
 
 import './custom.css'
 
@@ -27,10 +27,7 @@ export default class App extends Component {
                 </PrivateRoute>
                 <Route path={ApplicationPaths.Register} component={Signup} />
                 {/*        <Route path='/product' component={Product} />
-                    <Route path='/counter' component={Counter} />
                     <Route path='/basket' component={Basket} />*/}
-                {/*<AuthorizeRoute path='/fetch-data' component={FetchData} />*/}
-                {/*<Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />*/}
             </Layout>
         );
     }

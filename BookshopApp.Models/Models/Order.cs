@@ -9,10 +9,9 @@ namespace BookshopApp.Models
         public string ReasonForCancellation { get; set; }
 
         public DateTime DateOfOrdering { get; set; }
-        public DateTime DateOfPaing { get; set; }
         public DateTime DateOfClosing { get; set; }
 
-        public string CustomerId { get; set; }
+        public int CustomerId { get; set; }
         public User Customer { get; set; }
 
         public int StateId { get; set; }

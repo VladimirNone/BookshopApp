@@ -1,6 +1,6 @@
 ﻿import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router';
-import { ApplicationPaths } from './api-authorization/ApiAuthorizationConstants';
+import { ApplicationPaths } from './api-authorization/ApiConstants';
 import authService from './api-authorization/AuthorizeService';
 
 export class Signup extends Component {

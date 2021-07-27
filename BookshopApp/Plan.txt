@@ -14,3 +14,13 @@
 - Отправка данных с помощью post через html http://htmlbook.ru/html/form (заюзать onsubmit http://htmlbook.ru/html/attr/event для redirect)
 
 ? jwt-токены https://fuse8.ru/articles/using-asp-net-core-identity-and-jwt
+
+- Pages
+	- Главная страница
+		- Список продуктов
+		- Пагинация
+		? Поиск
+		? Категории
+	- Корзина
+	- Просмотр заказов
+	- Товар

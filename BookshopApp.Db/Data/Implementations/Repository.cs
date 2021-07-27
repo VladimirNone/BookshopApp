@@ -24,6 +24,12 @@ namespace BookshopApp.Db.Implementations
             await DbSet.AddAsync(entity);
         }
 
+        public virtual async Task AddEntitiesAsync(IEnumerable<T> entities)
+        {
+            if (entities == null) throw new ArgumentNullException("entities");
+            await DbSet.AddRangeAsync(entities);
+        }
+
         public virtual void Update(T entity)
         {
             if (entity == null) throw new ArgumentNullException("entity");

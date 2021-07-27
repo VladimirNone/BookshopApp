@@ -32,6 +32,8 @@ namespace BookshopApp.Db
                 new OrderState() { Id = 4, NameOfState = "Cancelled" }
                 );
 
+            modelBuilder.Entity<Product>().Property(h => h.LinkToImage).HasDefaultValue("/Images/no_foto.png");
+
             base.OnModelCreating(modelBuilder);
         }
     }

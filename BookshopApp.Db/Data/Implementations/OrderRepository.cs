@@ -11,6 +11,7 @@ namespace BookshopApp.Db.Implementations
         public OrderRepository(ApplicationDbContext context)
             : base(context)
         {
+
         }
     }
 }

@@ -13,17 +13,16 @@ namespace BookshopApp.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("Account")]
+    [Route("[controller]")]
     public class AccountController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
+
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<Role> _roleManager;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<Role> roleManager, IUnitOfWork unitOfWork)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<Role> roleManager)
         {
-            _unitOfWork = unitOfWork;
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
