@@ -13,7 +13,7 @@ namespace BookshopApp.Db
         public IOrderRepository OrdersRepository { get; }
         public IProductRepository ProductsRepository { get; }
 
-        Task Commit();
+        Task<bool> Commit();
         Task Rollback();
     }
 }

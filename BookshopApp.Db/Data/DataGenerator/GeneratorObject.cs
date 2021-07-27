@@ -36,8 +36,7 @@ namespace BookshopApp.Db.Generator
                 .RuleFor(h => h.DateOfOrdering, g => g.Date.Between(DateTime.Parse("1990.05.05"), DateTime.Now))
                 .RuleFor(h => h.DateOfClosing, (g, o) => g.Date.Between(o.DateOfOrdering, DateTime.Now))
                 .RuleFor(h => h.FinalLocation, g=>g.Address.Locale)
-                //3 - completed
-                .RuleFor(h => h.StateId, g => 3);
+                .RuleFor(h => h.StateId, g => (int)OrderStateEnum.Completed);
 
         public static Faker<User> GenerateUser()
             => new Faker<User>("ru")

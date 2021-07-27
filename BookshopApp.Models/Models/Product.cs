@@ -12,6 +12,7 @@ namespace BookshopApp.Models
         public double Price { get; set; }
         public double CountInStock { get; set; }
         public DateTime DateOfPublication { get; set; }
+        public bool Deleted { get; set; }
 
         public int AuthorId { get; set; }
         public Author Author { get; set; }

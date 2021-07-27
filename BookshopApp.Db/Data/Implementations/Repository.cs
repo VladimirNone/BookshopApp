@@ -12,9 +12,11 @@ namespace BookshopApp.Db.Implementations
     public abstract class Repository<T> : IRepository<T> where T: class, IEntity
     {
         public DbSet<T> DbSet { get; protected set; }
+        protected ApplicationDbContext AppDbContext { get; private set; }
 
         public Repository(ApplicationDbContext dbContext)
         {
+            AppDbContext = dbContext;
             DbSet = dbContext.Set<T>();
         }
 

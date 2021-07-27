@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,36 +13,48 @@ namespace BookshopApp.Db.Implementations
         private IUserRepository _usersRepository;
         private IOrderRepository _ordersRepository;
         private IProductRepository _productsRepository;
-        private ApplicationDbContext context { get; }
+        private ApplicationDbContext _context { get; }
+        private ILogger<UnitOfWork> _logger { get; }
 
         public IUserRepository UsersRepository
         {
-            get => _usersRepository ??= new UserRepository(context);
+            get => _usersRepository ??= new UserRepository(_context);
         }
 
         public IOrderRepository OrdersRepository
         {
-            get => _ordersRepository ??= new OrderRepository(context);
+            get => _ordersRepository ??= new OrderRepository(_context);
         }
 
         public IProductRepository ProductsRepository
         {
-            get => _productsRepository ??= new ProductRepository(context);
+            get => _productsRepository ??= new ProductRepository(_context);
         }
 
-        public UnitOfWork(ApplicationDbContext context)
+        public UnitOfWork(ApplicationDbContext context, ILogger<UnitOfWork> logger)
         {
-            this.context = context;
+            _context = context;
+            _logger = logger;
         }
 
-        public async Task Commit()
+        public async Task<bool> Commit()
         {
-            await context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await _context.DisposeAsync();
+                _logger.LogError(ex.Message);
+                return false;
+            }
         }
 
         public async Task Rollback()
         {
-            await context.DisposeAsync();
+            await _context.DisposeAsync();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BookshopApp.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,13 @@ namespace BookshopApp.Db.Implementations
             : base(context)
         {
 
+        }
+
+        //test .AsNoTracking()
+        public async Task<Order> GetUserBasket(int userId)
+        {
+            AppDbContext.Products.Load();
+            return await DbSet.Include(h => h.OrderedProducts).AsNoTracking().SingleOrDefaultAsync(h => h.CustomerId == userId && h.StateId == (int)OrderStateEnum.IsBasket);
         }
     }
 }
