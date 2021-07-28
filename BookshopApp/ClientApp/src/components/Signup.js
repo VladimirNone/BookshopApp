@@ -1,7 +1,7 @@
 ﻿import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router';
-import { ApplicationPaths } from './api-authorization/ApiConstants';
-import authService from './api-authorization/AuthorizeService';
+import { ApplicationPaths } from './Api-authorization/ApiConstants';
+import authService from './Api-authorization/AuthorizeService';
 
 export class Signup extends Component {
     constructor(props) {

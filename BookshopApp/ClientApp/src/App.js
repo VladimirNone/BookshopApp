@@ -4,8 +4,8 @@ import { Layout } from './components/Layout';
 import { Login } from './components/Login';
 import { Logout } from './components/Logout';
 import { Signup } from './components/Signup';
-import { PrivateRoute } from './components/api-authorization/PrivateRoute';
-import { ApplicationPaths } from './components/api-authorization/ApiConstants';
+import { PrivateRoute } from './components/Api-authorization/PrivateRoute';
+import { ApplicationPaths } from './components/Api-authorization/ApiConstants';
 
 import './custom.css'
 import { Content } from './components/Content';

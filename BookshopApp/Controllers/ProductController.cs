@@ -33,10 +33,10 @@ namespace BookshopApp.Controllers
         {
             var prods = await _unitOfWork.ProductsRepository.GetProductsAsync(page, CountOfProductsOnPage);
             var prodsDto = _mapper.Map<ProductDto[]>(prods);
-            //Description can be very large. Trim it for MainPage
+            //Description may be very large. Trim it for MainPage
             foreach (var prod in prodsDto)
             {
-                prod.Description = prod.Description.Substring(0, 100);
+                prod.Description = prod.Description.Substring(0, 100) + "...";
             }
             return Ok(prodsDto);
         }

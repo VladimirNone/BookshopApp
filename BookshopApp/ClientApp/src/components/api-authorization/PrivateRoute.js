@@ -15,12 +15,7 @@ export class PrivateRoute extends Component {
     }
 
     componentDidMount() {
-        this.populateAuthenticationState();
-    }
-
-    async populateAuthenticationState() {
-        const isAuthenticated = await authService.isAuthenticated();
-        this.setState({ isAuthenticated });
+        authService.isAuthenticated().then(res => this.setState({ isAuthenticated: res }));
     }
 
     render() {

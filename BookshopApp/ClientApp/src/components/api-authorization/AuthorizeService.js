@@ -59,7 +59,7 @@ export class AuthorizeService {
     }
 
     async logout() {
-        await fetch(ApplicationPaths.Logout, {method: 'POST'});
+        await fetch(ApplicationPaths.Logout, { method: 'POST'});
     }
 
     static get instance() { return authService }
