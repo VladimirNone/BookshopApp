@@ -32,13 +32,17 @@ namespace BookshopApp.Controllers
         public async Task<IActionResult> GetProducts(int page)
         {
             var prods = await _unitOfWork.ProductsRepository.GetProductsAsync(page, CountOfProductsOnPage);
-            var prodsDto = _mapper.Map<ProductDto[]>(prods);
+
+            var pageIsLast = prods.Count() <= CountOfProductsOnPage;
+
+            var prodsDto = _mapper.Map<ProductDto[]>(prods[..(pageIsLast? ^0 : CountOfProductsOnPage)]);
+
             //Description may be very large. Trim it for MainPage
             foreach (var prod in prodsDto)
             {
                 prod.Description = prod.Description.Substring(0, 100) + "...";
             }
-            return Ok(prodsDto);
+            return Ok(new { prods = prodsDto, pageIsLast });
         }
 
         [HttpGet("{id:int}")]

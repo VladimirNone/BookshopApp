@@ -1,6 +1,4 @@
-﻿import React from 'react';
-import { Redirect } from 'react-router';
-import authService from './Api-authorization/AuthorizeService';
+﻿import authService from './Api-authorization/AuthorizeService';
 
 export function Logout() {
     authService.logout();

@@ -2,15 +2,6 @@
 
 export class Card extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            
-        }
-
-    }
-
     render() {
         const product = this.props.product;
 
@@ -18,7 +9,7 @@ export class Card extends Component {
             <div className="card mt-3">
                 <div className="row no-gutters">
                     <div className="col-md-4">
-                        <img src={product.linkToImage} alt="image" width="100%" />
+                        <img src={product.linkToImage} width="100%" />
                     </div>
                     <div className="col-md-8">
                         <div className="card-body">

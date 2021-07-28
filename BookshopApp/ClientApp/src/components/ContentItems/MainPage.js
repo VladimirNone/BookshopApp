@@ -10,13 +10,20 @@ export class MainPage extends Component {
 
         this.state = {
             page: 1,
-            products:[],
+            products: [],
+            pageIsLast: false,
+            dataWasUpdated: true,
         }
 
     }
 
     componentDidMount() {
         this.getProductsFromServer();
+    }
+
+    componentDidUpdate() {
+        if (!this.state.dataWasUpdated)
+            this.getProductsFromServer();
     }
 
     async getProductsFromServer() {
@@ -34,7 +41,8 @@ export class MainPage extends Component {
         }
         else
         {
-            this.setState({ products: await response.json() })
+            const answer = await response.json();
+            this.setState({ products: answer.prods, pageIsLast: answer.pageIsLast, dataWasUpdated: true });
         }
     }
 
@@ -45,7 +53,7 @@ export class MainPage extends Component {
             <Fragment>
                 <Searcher />
                 {prods.map((prod, i) => <Card key={i} product={prod} />)}
-                <Pagination curPage={this.state.page} changePage={(newPage) => this.state.page == newPage && this.setState({ page: newPage })} />
+                <Pagination curPage={this.state.page} pageIsLast={this.state.pageIsLast} changePage={(newPage) => this.setState({ page: newPage, dataWasUpdated: false })} />
             </Fragment>
         );
     }

@@ -4,7 +4,6 @@ import { Layout } from './components/Layout';
 import { Login } from './components/Login';
 import { Logout } from './components/Logout';
 import { Signup } from './components/Signup';
-import { PrivateRoute } from './components/Api-authorization/PrivateRoute';
 import { ApplicationPaths } from './components/Api-authorization/ApiConstants';
 
 import './custom.css'
@@ -18,7 +17,7 @@ export default class App extends Component {
             <Layout>
                 <Switch>
                     <Route path={ApplicationPaths.Login} component={Login} />
-                    <PrivateRoute path={ApplicationPaths.Logout}><Logout /></PrivateRoute>
+                    <Route path={ApplicationPaths.Logout} component={Logout} />
                     <Route path={ApplicationPaths.Register} component={Signup} />
 
                     <Route path="/" component={Content}/>
