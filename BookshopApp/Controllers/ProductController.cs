@@ -29,14 +29,19 @@ namespace BookshopApp.Controllers
         }
 
         [HttpGet("prods/{page:int}")]
-        public IActionResult GetProducts(int page)
+        public async Task<IActionResult> GetProducts(int page)
         {
-            var requestData = _unitOfWork.ProductsRepository.GetProductsAsync(page, CountOfProductsOnPage);
-
-            return Ok(requestData);
+            var prods = await _unitOfWork.ProductsRepository.GetProductsAsync(page, CountOfProductsOnPage);
+            var prodsDto = _mapper.Map<ProductDto[]>(prods);
+            //Description can be very large. Trim it for MainPage
+            foreach (var prod in prodsDto)
+            {
+                prod.Description = prod.Description.Substring(0, 100);
+            }
+            return Ok(prodsDto);
         }
 
-        [HttpGet("product/{id:int}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetProductById(int id)
         {
             var productOut = _mapper.Map<ProductDto>(await _unitOfWork.ProductsRepository.GetEntityAsync(id));
