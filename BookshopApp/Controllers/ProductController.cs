@@ -2,6 +2,7 @@
 using BookshopApp.Db;
 using BookshopApp.Models;
 using BookshopApp.Models.DTO;
+using BookshopApp.Models.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,7 @@ namespace BookshopApp.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("prods/{page:int}")]
+        [HttpGet("Prods/{page:int}")]
         public async Task<IActionResult> GetProducts(int page)
         {
             var prods = await _unitOfWork.ProductsRepository.GetProductsAsync(page, CountOfProductsOnPage);
@@ -36,7 +37,7 @@ namespace BookshopApp.Controllers
             var pageIsLast = prods.Count() <= CountOfProductsOnPage;
             //we return CountOfProductsOnPage items, but for determining - Is this page the last? - we use this condition 
             //if prods.Count() == (CountOfProductsOnPage + 1) then exist next page
-            var prodsDto = _mapper.Map<ProductDto[]>(prods[..(pageIsLast? ^0 : CountOfProductsOnPage)]);
+            var prodsDto = _mapper.Map<ProductDto[]>(prods[..(pageIsLast ? ^0 : CountOfProductsOnPage)]);
 
             //Description may be very large. Trim it for MainPage
             foreach (var prod in prodsDto)
@@ -54,10 +55,10 @@ namespace BookshopApp.Controllers
         }
 
         [Authorize]
-        [HttpPost("buy")]
-        public async Task<IActionResult> AddProductToBasket(int productId, int count)
+        [HttpPost("Buy")]
+        public async Task<IActionResult> AddProductToBasket(BuyDto buy)
         {
-            if (count < 1)
+            if (buy.Count < 1)
                 return BadRequest();
 
             var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -71,13 +72,13 @@ namespace BookshopApp.Controllers
                 await _unitOfWork.OrdersRepository.AddEntityAsync(cart);
             }
 
-            //если корзина существует, но пуста. Например, добавил и удалил продукт. Сработает условие?
-            if (cart.OrderedProducts?.Find(o => o.ProductId == productId) == null)
+            //if the cart exists, but is empty. For example, add and deltet product. This condition will work?
+            if (cart.OrderedProducts?.Find(o => o.ProductId == buy.ProductId) == null)
             {
                 if(cart.OrderedProducts == null)
                     cart.OrderedProducts = new List<OrderedProduct>();
 
-                cart.OrderedProducts.Add(new OrderedProduct() { ProductId = productId, Count = count, OrderId = cart.Id, TimeOfBuing = DateTime.Now });
+                cart.OrderedProducts.Add(new OrderedProduct() { ProductId = buy.ProductId, Count = buy.Count, OrderId = cart.Id, TimeOfBuing = DateTime.Now });
             }
 
             if(await _unitOfWork.Commit())

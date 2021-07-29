@@ -22,8 +22,9 @@ export const ApplicationPagePaths = {
 
 export const ApplicationApiPaths = {
 
+    Buy:                    `${apiProductPrefix}/Buy`,
     Product:                `${apiProductPrefix}`,
-    Products:               `${apiProductPrefix}/prods`,
+    Products:               `${apiProductPrefix}/Prods`,
 
     Login:                  `${apiAccountPrefix}/Login`,
     Register:               `${apiAccountPrefix}/Signup`,

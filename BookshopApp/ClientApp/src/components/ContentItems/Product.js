@@ -1,4 +1,5 @@
 ﻿import React, { Component, Fragment } from 'react';
+import { Redirect } from 'react-router';
 import { ApplicationApiPaths } from '../Api-authorization/AppConstants';
 
 export class Product extends Component {
@@ -8,8 +9,13 @@ export class Product extends Component {
 
         this.state = {
             productId: parseInt(props.match.params.id),
-            product: null
+            product: null,
+            quantityProdForBuy: 1,
+            redirect: false,
         }
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     componentDidMount() {
@@ -33,7 +39,28 @@ export class Product extends Component {
         }
     }
 
+    handleInputChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
 
+    async handleSubmit() {
+        var response = await fetch(ApplicationApiPaths.Buy, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ ProductId: this.state.product.id, Count: this.state.quantityProdForBuy })
+        });
+        
+        if (!response.ok) {
+            console.log("error")
+        }
+        else {
+            this.setState({ redirect: true });
+        }
+    }
 
     render() {
         const product = this.state.product;
@@ -41,10 +68,13 @@ export class Product extends Component {
         if (product == null)
             return (<div />);
 
+        if (this.state.redirect)
+            return (<Redirect to={'/'} />);
+
         return (
             <Fragment>
                 <div className="row" >
-                    <img src={product.linkToImage} width="100%" />
+                    <img src={product.linkToImage} alt="no foto" width="100%" />
                 </div>
                 <div className="row mx-2 mt-3">
                     <div className="product-details-content-area">
@@ -58,14 +88,14 @@ export class Product extends Component {
                             <p className="product-description text-justify">{product.description}</p>
                         </div>
                         <div className="product-buy d-flex justify-content-end input-group ">
-                            <form className="form-inline mr-3 ">
+                            <form className="form-inline mr-3">
                                 <div className="form-group mb-2">
                                     <p className="form-control-plaintext"><span>Количество</span></p>
                                 </div>
                                 <div className="form-group mx-3 mb-2">
-                                    <input className="form-control" min="1" max="100" defaultValue="1" type="number" />
+                                    <input className="form-control" min="1" max="100" name="quantityProdForBuy" onChange={this.handleInputChange} value={this.state.quantityProdForBuy} type="number" />
                                 </div>
-                                <button className="btn btn-primary mb-2">Добавить в корзину</button>
+                                <button type="button" className="btn btn-primary mb-2" onClick={() => this.handleSubmit()}>Добавить в корзину</button>
                             </form>
                         </div>
                     </div>

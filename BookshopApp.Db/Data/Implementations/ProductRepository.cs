@@ -19,6 +19,6 @@ namespace BookshopApp.Db.Implementations
             => await DbSet.Include(h=>h.Author).Where(h => h.Deleted == false).Skip(page * count).Take(count+1).AsNoTracking().ToArrayAsync();
 
         public override async Task<Product> GetEntityAsync(int id)
-            => await DbSet.Include(h => h.Author).Where(h => h.Deleted == false).AsNoTracking().FirstOrDefaultAsync();
+            => await DbSet.Include(h => h.Author).Where(h => h.Deleted == false && h.Id == id).AsNoTracking().FirstOrDefaultAsync();
     }
 }

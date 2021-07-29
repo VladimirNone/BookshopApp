@@ -36,9 +36,7 @@ export class MainPage extends Component {
         });
 
         if (!response.ok)
-        {
-            console.log(await response.json())
-        }
+            console.log("error");
         else
         {
             const answer = await response.json();
