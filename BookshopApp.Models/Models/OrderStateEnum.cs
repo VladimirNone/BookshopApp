@@ -8,7 +8,7 @@ namespace BookshopApp.Models
 {
     public enum OrderStateEnum
     {
-        IsBasket = 1,
+        IsCart = 1,
         Confirmed,
         Completed,
         Cancelled

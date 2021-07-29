@@ -26,7 +26,7 @@ namespace BookshopApp.Db
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OrderState>().HasData(
-                new OrderState() { Id = 1, NameOfState = "IsBasket" },
+                new OrderState() { Id = 1, NameOfState = "IsCart" },
                 new OrderState() { Id = 2, NameOfState = "Confirmed" },
                 new OrderState() { Id = 3, NameOfState = "Completed" },
                 new OrderState() { Id = 4, NameOfState = "Cancelled" }

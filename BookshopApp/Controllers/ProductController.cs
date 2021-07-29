@@ -62,22 +62,22 @@ namespace BookshopApp.Controllers
 
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            var basket = await _unitOfWork.OrdersRepository.GetUserBasketAsync(user.Id);
+            var cart = await _unitOfWork.OrdersRepository.GetUserBasketAsync(user.Id);
 
-            if (basket is null)
+            if (cart is null)
             {
-                basket = new Order() {CustomerId = user.Id, StateId = (int)OrderStateEnum.IsBasket };
+                cart = new Order() {CustomerId = user.Id, StateId = (int)OrderStateEnum.IsCart };
 
-                await _unitOfWork.OrdersRepository.AddEntityAsync(basket);
+                await _unitOfWork.OrdersRepository.AddEntityAsync(cart);
             }
 
             //если корзина существует, но пуста. Например, добавил и удалил продукт. Сработает условие?
-            if (basket.OrderedProducts?.Find(o => o.ProductId == productId) == null)
+            if (cart.OrderedProducts?.Find(o => o.ProductId == productId) == null)
             {
-                if(basket.OrderedProducts == null)
-                    basket.OrderedProducts = new List<OrderedProduct>();
+                if(cart.OrderedProducts == null)
+                    cart.OrderedProducts = new List<OrderedProduct>();
 
-                basket.OrderedProducts.Add(new OrderedProduct() { ProductId = productId, Count = count, OrderId = basket.Id, TimeOfBuing = DateTime.Now });
+                cart.OrderedProducts.Add(new OrderedProduct() { ProductId = productId, Count = count, OrderId = cart.Id, TimeOfBuing = DateTime.Now });
             }
 
             if(await _unitOfWork.Commit())

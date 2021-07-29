@@ -4,7 +4,7 @@ import { Layout } from './components/Layout';
 import { Login } from './components/Login';
 import { Logout } from './components/Logout';
 import { Signup } from './components/Signup';
-import { ApplicationPagePaths } from './components/Api-authorization/ApçConstants';
+import { ApplicationPagePaths } from './components/Api-authorization/AppConstants';
 
 import './custom.css'
 import { Content } from './components/Content';

@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 
-export class Basket extends Component {
+export class Cart extends Component {
 
     render() {
         return (

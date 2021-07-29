@@ -1,9 +1,9 @@
 ﻿import React, { Component } from 'react';
 import { MainPage } from './ContentItems/MainPage';
 import { Product } from './ContentItems/Product';
-import { Basket } from './ContentItems/Basket';
+import { Cart } from './ContentItems/Cart';
 import { Route, Switch } from 'react-router';
-import { ApplicationPagePaths } from './Api-authorization/ApзConstants';
+import { ApplicationPagePaths } from './Api-authorization/AppConstants';
 
 export class Content extends Component {
 
@@ -18,7 +18,7 @@ export class Content extends Component {
                     <Switch>
                         <Route exact path='/' component={MainPage} />
                         <Route path={ApplicationPagePaths.Product + '/:id'} component={Product} />
-                        <Route path={ApplicationPagePaths.Basket} component={Basket} />
+                        <Route path={ApplicationPagePaths.Cart} component={Cart} />
                     </Switch>
                 </div>
 

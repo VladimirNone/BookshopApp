@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Searcher } from './MainPageComponents/Searcher';
 import { Card } from './MainPageComponents/Card';
 import { Pagination } from './MainPageComponents/Pagination';
-import { ApplicationApiPaths } from '../Api-authorization/ApçConstants';
+import { ApplicationApiPaths } from '../Api-authorization/AppConstants';
 
 export class MainPage extends Component {
     constructor(props) {

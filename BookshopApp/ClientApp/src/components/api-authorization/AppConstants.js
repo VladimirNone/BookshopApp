@@ -10,13 +10,13 @@ const apiProductPrefix = `${apiPrefix}${productPrefix}`
 
 export const ApplicationPagePaths = {
 
-    Product: `${productPrefix}`,
-    Basket: `${orderPrefix}/Basket`,
+    Product:                `${productPrefix}`,
+    Cart:                   `${orderPrefix}/Cart`,
 
-    Login: `${accounttPrefix}/Login`,
-    Register: `${accounttPrefix}/Signup`,
-    Profile: `${accounttPrefix}/Profile`,
-    Logout: `${accounttPrefix}/Logout`,
+    Login:                  `${accounttPrefix}/Login`,
+    Register:               `${accounttPrefix}/Signup`,
+    Profile:                `${accounttPrefix}/Profile`,
+    Logout:                 `${accounttPrefix}/Logout`,
 
 }
 

@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { ApplicationPagePaths } from '../../Api-authorization/ApзConstants';
+import { ApplicationPagePaths } from '../../Api-authorization/AppConstants';
 
 export class Card extends Component {
 
@@ -16,6 +16,7 @@ export class Card extends Component {
                     <div className="col-md-8">
                         <div className="card-body">
                             <h5 className="card-title">{product.name}</h5>
+                            {/*Need use text-truncate */}
                             <p className="card-text">{product.description}</p>
                             <p className="card-text text-right"><b>{product.price}$</b></p>
                             <p className="card-text"><small className="text-muted">{product.dateOfPublication}</small></p>

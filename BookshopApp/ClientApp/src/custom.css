@@ -8,12 +8,7 @@ a.card:hover{
     text-decoration: none;
 }
 
-code {
-  color: #E01A76;
+.product-description {
+    text-indent: 2em;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}

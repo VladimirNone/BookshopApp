@@ -1,6 +1,6 @@
 ﻿import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { ApplicationPagePaths } from './Api-authorization/ApзConstants';
+import { ApplicationPagePaths } from './Api-authorization/AppConstants';
 import authService from './Api-authorization/AuthorizeService';
 
 export class Login extends Component {

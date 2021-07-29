@@ -1,4 +1,4 @@
-import { ApplicationApiPaths } from './ApçConstants';
+import { ApplicationApiPaths } from './AppConstants';
 
 export class AuthorizeService {
     _user = null;
