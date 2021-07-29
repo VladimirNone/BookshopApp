@@ -45,6 +45,7 @@ namespace BookshopApp
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddControllersWithViews();
+            //For errors
             services.AddRazorPages();
 
             services.AddAutoMapper(typeof(MapperProfile));

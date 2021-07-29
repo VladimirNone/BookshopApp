@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookshopApp.Models.DTO
 {
-    public class ProductDto
+    public class ProductDto : Entity
     {
         public string Name { get; set; }
         public short YearOfRelease { get; set; }

@@ -34,7 +34,8 @@ namespace BookshopApp.Controllers
             var prods = await _unitOfWork.ProductsRepository.GetProductsAsync(page, CountOfProductsOnPage);
 
             var pageIsLast = prods.Count() <= CountOfProductsOnPage;
-
+            //we return CountOfProductsOnPage items, but for determining - Is this page the last? - we use this condition 
+            //if prods.Count() == (CountOfProductsOnPage + 1) then exist next page
             var prodsDto = _mapper.Map<ProductDto[]>(prods[..(pageIsLast? ^0 : CountOfProductsOnPage)]);
 
             //Description may be very large. Trim it for MainPage

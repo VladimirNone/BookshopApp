@@ -2,7 +2,8 @@
 import { MainPage } from './ContentItems/MainPage';
 import { Product } from './ContentItems/Product';
 import { Basket } from './ContentItems/Basket';
-import { Route } from 'react-router';
+import { Route, Switch } from 'react-router';
+import { ApplicationPagePaths } from './Api-authorization/ApзConstants';
 
 export class Content extends Component {
 
@@ -14,9 +15,11 @@ export class Content extends Component {
 			    </div>
 
                 <div className="col-md-7 border">
-                    <Route exact path='/' component={MainPage} />
-                    <Route path='/product' component={Product} />
-                    <Route path='/basket' component={Basket} />
+                    <Switch>
+                        <Route exact path='/' component={MainPage} />
+                        <Route path={ApplicationPagePaths.Product + '/:id'} component={Product} />
+                        <Route path={ApplicationPagePaths.Basket} component={Basket} />
+                    </Switch>
                 </div>
 
                 <div className="col-md border">

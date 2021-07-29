@@ -3,6 +3,7 @@ import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLi
 import { Link } from 'react-router-dom';
 import { LoginMenu } from './Api-authorization/LoginMenu';
 import './NavMenu.css';
+import { ApplicationPagePaths } from './Api-authorization/ApçConstants';
 
 export class NavMenu extends Component {
     static displayName = NavMenu.name;
@@ -35,10 +36,10 @@ export class NavMenu extends Component {
                                     <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
+                                    <NavLink tag={Link} className="text-dark" to={ApplicationPagePaths.Basket}>Basket</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
+                                    <NavLink tag={Link} className="text-dark" to="/orders">Orders</NavLink>
                                 </NavItem>
                                 <LoginMenu>
                                 </LoginMenu>

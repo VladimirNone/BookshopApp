@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookshopApp.Models.DTO
 {
-    public class OrderDto
+    public class OrderDto : Entity
     {
         public string FinalLocation { get; set; }
         public string ReasonForCancellation { get; set; }

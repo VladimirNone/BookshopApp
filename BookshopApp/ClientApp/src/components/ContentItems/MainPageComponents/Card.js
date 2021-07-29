@@ -1,4 +1,6 @@
 ﻿import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { ApplicationPagePaths } from '../../Api-authorization/ApзConstants';
 
 export class Card extends Component {
 
@@ -6,7 +8,7 @@ export class Card extends Component {
         const product = this.props.product;
 
         return (
-            <div className="card mt-3">
+            <Link className="card mt-3" to={ApplicationPagePaths.Product + "/" + product.id}>
                 <div className="row no-gutters">
                     <div className="col-md-4">
                         <img src={product.linkToImage} width="100%" />
@@ -20,6 +22,6 @@ export class Card extends Component {
                         </div>
                     </div>
                 </div>
-            </div>);
+            </Link>);
     }
 }

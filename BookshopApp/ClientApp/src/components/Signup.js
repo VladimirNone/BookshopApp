@@ -1,6 +1,6 @@
 ﻿import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router';
-import { ApplicationPaths } from './Api-authorization/ApiConstants';
+import { ApplicationApiPaths } from './Api-authorization/ApзConstants';
 import authService from './Api-authorization/AuthorizeService';
 
 export class Signup extends Component {
@@ -43,7 +43,7 @@ export class Signup extends Component {
 
     render() {
         if (this.state.redirect) {
-            return (<Redirect to={ApplicationPaths.Login} />);
+            return (<Redirect to={ApplicationApiPaths.Login} />);
         }
 
         return (
