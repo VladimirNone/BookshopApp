@@ -46,6 +46,14 @@ export class Product extends Component {
     }
 
     async handleSubmit() {
+        if (this.state.quantityProdForBuy > this.state.product.countInStock) {
+            return alert("В наличии нет желаемого количества продуктов");
+        }
+
+        if (this.state.quantityProdForBuy < 1) {
+            return alert("Нельзя заказывать отрицательное или нулевое количество продуктов");
+        }
+
         var response = await fetch(ApplicationApiPaths.Buy, {
             method: 'POST',
             headers: {

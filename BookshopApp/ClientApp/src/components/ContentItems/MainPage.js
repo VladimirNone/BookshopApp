@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { Searcher } from './MainPageComponents/Searcher';
-import { Card } from './MainPageComponents/Card';
-import { Pagination } from './MainPageComponents/Pagination';
+import { Searcher } from './SubComponents/Searcher';
+import { ProductCard } from './SubComponents/ProductCard';
+import { Pagination } from './SubComponents/Pagination';
 import { ApplicationApiPaths } from '../Api-authorization/AppConstants';
 
 export class MainPage extends Component {
@@ -50,7 +50,7 @@ export class MainPage extends Component {
         return (
             <Fragment>
                 <Searcher />
-                {prods.map((prod, i) => <Card key={i} product={prod} />)}
+                {prods.map((prod, i) => <ProductCard key={i} product={prod} />)}
                 <Pagination curPage={this.state.page} pageIsLast={this.state.pageIsLast} changePage={(newPage) => this.setState({ page: newPage, dataWasUpdated: false })} />
             </Fragment>
         );

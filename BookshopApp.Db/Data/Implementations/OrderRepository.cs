@@ -15,11 +15,9 @@ namespace BookshopApp.Db.Implementations
 
         }
 
-        public async Task<Order> GetUserBasketAsync(int userId)
+        public async Task<Order> GetUserCartAsync(int userId)
         {
-            //can i use asnotracking here?
-            AppDbContext.Products.Load();
-            return await DbSet.Include(h => h.OrderedProducts).Where(h => h.CustomerId == userId && h.StateId == (int)OrderStateEnum.IsCart).AsNoTracking().FirstOrDefaultAsync();
+            return await DbSet.Where(h => h.CustomerId == userId && h.StateId == (int)OrderStateEnum.IsCart).Include(h => h.OrderedProducts).ThenInclude(h=>h.Product).FirstOrDefaultAsync();
         }
     }
 }

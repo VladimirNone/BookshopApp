@@ -50,38 +50,41 @@ namespace BookshopApp.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetProductById(int id)
         {
-            var productOut = _mapper.Map<ProductDto>(await _unitOfWork.ProductsRepository.GetEntityAsync(id));
+            var productOut = _mapper.Map<ProductDto>(await _unitOfWork.ProductsRepository.GetFullProductAsync(id));
             return Ok(productOut);
         }
 
         [Authorize]
         [HttpPost("Buy")]
-        public async Task<IActionResult> AddProductToBasket(BuyDto buy)
+        public async Task<IActionResult> AddProductToCart(BuyDto buy)
         {
             if (buy.Count < 1)
                 return BadRequest();
 
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            var cart = await _unitOfWork.OrdersRepository.GetUserBasketAsync(user.Id);
+            var cart = await _unitOfWork.OrdersRepository.GetUserCartAsync(user.Id);
 
             if (cart is null)
             {
-                cart = new Order() {CustomerId = user.Id, StateId = (int)OrderStateEnum.IsCart };
+                cart = new Order() {CustomerId = user.Id, StateId = (int)OrderStateEnum.IsCart, OrderedProducts = new List<OrderedProduct>() };
 
                 await _unitOfWork.OrdersRepository.AddEntityAsync(cart);
             }
 
-            //if the cart exists, but is empty. For example, add and deltet product. This condition will work?
-            if (cart.OrderedProducts?.Find(o => o.ProductId == buy.ProductId) == null)
+            var orderedProduct = cart.OrderedProducts.Find(h => h.Cancelled == false && h.ProductId == buy.ProductId);
+            if (orderedProduct == null)
             {
-                if(cart.OrderedProducts == null)
-                    cart.OrderedProducts = new List<OrderedProduct>();
-
                 cart.OrderedProducts.Add(new OrderedProduct() { ProductId = buy.ProductId, Count = buy.Count, OrderId = cart.Id, TimeOfBuing = DateTime.Now });
+                (await _unitOfWork.ProductsRepository.GetEntityAsync(buy.ProductId)).CountInStock -= buy.Count;
+            }
+            else
+            {
+                orderedProduct.Count += buy.Count;
+                orderedProduct.Product.CountInStock -= buy.Count;
             }
 
-            if(await _unitOfWork.Commit())
+            if (await _unitOfWork.Commit())
                 return Ok();
             else
                 return BadRequest();

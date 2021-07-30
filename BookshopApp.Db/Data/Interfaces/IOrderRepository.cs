@@ -8,6 +8,6 @@ namespace BookshopApp.Db
 {
     public interface IOrderRepository : IRepository<Order>
     {
-        Task<Order> GetUserBasketAsync(int userId);
+        Task<Order> GetUserCartAsync(int userId);
     }
 }

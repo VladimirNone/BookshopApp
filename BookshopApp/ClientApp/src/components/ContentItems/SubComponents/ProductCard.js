@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import { ApplicationPagePaths } from '../../Api-authorization/AppConstants';
 
-export class Card extends Component {
+export class ProductCard extends Component {
 
     render() {
         const product = this.props.product;

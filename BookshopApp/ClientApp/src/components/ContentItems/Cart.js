@@ -4,6 +4,8 @@ export class Cart extends Component {
 
     render() {
         return (
-            <div>Basket</div>);
+            <div>
+
+            </div>);
     }
 }
