@@ -22,10 +22,14 @@ namespace BookshopApp.Db.Mapper
                 .ForMember(h => h.Author, g=>g.MapFrom(src => src.Author));
             CreateMap<ProductDto, Product>();
 
+            CreateMap<OrderedProduct, CartProductDto>()
+                .ForMember(h => h.Product, g => g.MapFrom(src => src.Product));
+
             CreateMap<Order, OrderDto>()
                 .ForMember(h => h.Customer, g => g.MapFrom(src => src.Customer))
                 .ForMember(h => h.State, g => g.MapFrom(src => src.State));
-            CreateMap<OrderDto, Order>();
+            CreateMap<Order, CartDto>()
+                .ForMember(h => h.OrderedProducts, g => g.MapFrom(src => src.OrderedProducts));
         }
     }
 }

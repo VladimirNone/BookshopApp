@@ -7,8 +7,9 @@ const orderPrefix = "/Order"
 const apiPrefix = "/api"
 const apiAccountPrefix = `${apiPrefix}${accounttPrefix}`
 const apiProductPrefix = `${apiPrefix}${productPrefix}`
+const apiOrderPrefix = `${apiPrefix}${orderPrefix}`
 
-export const ApplicationPagePaths = {
+export const AppPagePaths = {
 
     Product:                `${productPrefix}`,
     Cart:                   `${orderPrefix}/Cart`,
@@ -20,10 +21,11 @@ export const ApplicationPagePaths = {
 
 }
 
-export const ApplicationApiPaths = {
+export const AppApiPaths = {
+    Cart:                   `${apiOrderPrefix}/Cart`,
 
-    Buy:                    `${apiProductPrefix}/Buy`,
     Product:                `${apiProductPrefix}`,
+    Buy:                    `${apiProductPrefix}/Buy`,
     Products:               `${apiProductPrefix}/Prods`,
 
     Login:                  `${apiAccountPrefix}/Login`,

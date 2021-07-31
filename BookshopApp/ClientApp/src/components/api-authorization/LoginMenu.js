@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import authService from './AuthorizeService';
-import { ApplicationPagePaths } from './AppConstants';
+import { AppPagePaths } from './AppConstants';
 
 export class LoginMenu extends Component {
     constructor(props) {
@@ -29,12 +29,12 @@ export class LoginMenu extends Component {
     render() {
         const { isAuthenticated, userName } = this.state;
         if (!isAuthenticated) {
-            const registerPath = `${ApplicationPagePaths.Register}`;
-            const loginPath = `${ApplicationPagePaths.Login}`;
+            const registerPath = `${AppPagePaths.Register}`;
+            const loginPath = `${AppPagePaths.Login}`;
             return this.anonymousView(registerPath, loginPath);
         } else {
-            const profilePath = `${ApplicationPagePaths.Profile}`;
-            const logoutPath = { pathname: `${ApplicationPagePaths.Logout}`, state: { local: true } };
+            const profilePath = `${AppPagePaths.Profile}`;
+            const logoutPath = { pathname: `${AppPagePaths.Logout}`, state: { local: true } };
             return this.authenticatedView(userName, profilePath, logoutPath);
         }
     }

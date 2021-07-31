@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Searcher } from './SubComponents/Searcher';
 import { ProductCard } from './SubComponents/ProductCard';
 import { Pagination } from './SubComponents/Pagination';
-import { ApplicationApiPaths } from '../Api-authorization/AppConstants';
+import { AppApiPaths } from '../Api-authorization/AppConstants';
 
 export class MainPage extends Component {
     constructor(props) {
@@ -28,7 +28,7 @@ export class MainPage extends Component {
 
     async getProductsFromServer() {
         //The server pagination starts from zero
-        let response = await fetch(ApplicationApiPaths.Products + '/' + (this.state.page - 1), {
+        let response = await fetch(AppApiPaths.Products + '/' + (this.state.page - 1), {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'

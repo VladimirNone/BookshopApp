@@ -3,7 +3,7 @@ import { MainPage } from './ContentItems/MainPage';
 import { Product } from './ContentItems/Product';
 import { Cart } from './ContentItems/Cart';
 import { Route, Switch } from 'react-router';
-import { ApplicationPagePaths } from './Api-authorization/AppConstants';
+import { AppPagePaths } from './Api-authorization/AppConstants';
 
 export class Content extends Component {
 
@@ -17,8 +17,8 @@ export class Content extends Component {
                 <div className="col-md-7 border">
                     <Switch>
                         <Route exact path='/' component={MainPage} />
-                        <Route path={ApplicationPagePaths.Product + '/:id'} component={Product} />
-                        <Route path={ApplicationPagePaths.Cart} component={Cart} />
+                        <Route path={AppPagePaths.Product + '/:id'} component={Product} />
+                        <Route path={AppPagePaths.Cart} component={Cart} />
                     </Switch>
                 </div>
 

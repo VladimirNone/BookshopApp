@@ -1,4 +1,3 @@
-using AutoMapper;
 using BookshopApp.Db;
 using BookshopApp.Db.Mapper;
 using BookshopApp.Models;
@@ -13,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 
 namespace BookshopApp
 {
@@ -44,8 +44,11 @@ namespace BookshopApp
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddControllersWithViews();
-            //For errors
+            services.AddControllers().AddNewtonsoftJson(options => {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.Formatting = Formatting.Indented;
+            });
+            //For error pages
             services.AddRazorPages();
 
             services.AddAutoMapper(typeof(MapperProfile));

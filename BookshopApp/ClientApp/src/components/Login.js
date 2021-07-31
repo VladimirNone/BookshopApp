@@ -1,6 +1,6 @@
 ﻿import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { ApplicationPagePaths } from './Api-authorization/AppConstants';
+import { AppPagePaths } from './Api-authorization/AppConstants';
 import authService from './Api-authorization/AuthorizeService';
 
 export class Login extends Component {
@@ -65,7 +65,7 @@ export class Login extends Component {
                                 </div>
                                 <div className="form-group">
                                     <p>
-                                        <Link to={ApplicationPagePaths.Register}>Register as a new user</Link>
+                                        <Link to={AppPagePaths.Register}>Register as a new user</Link>
                                     </p>
                                 </div>
                             </form>

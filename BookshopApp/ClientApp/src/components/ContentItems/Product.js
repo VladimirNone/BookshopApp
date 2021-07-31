@@ -1,6 +1,6 @@
 ﻿import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router';
-import { ApplicationApiPaths } from '../Api-authorization/AppConstants';
+import { AppApiPaths } from '../Api-authorization/AppConstants';
 
 export class Product extends Component {
 
@@ -23,7 +23,7 @@ export class Product extends Component {
     }
 
     async getProductFromServer() {
-        let response = await fetch(ApplicationApiPaths.Product + '/' + (this.state.productId), {
+        let response = await fetch(AppApiPaths.Product + '/' + (this.state.productId), {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -54,7 +54,7 @@ export class Product extends Component {
             return alert("Нельзя заказывать отрицательное или нулевое количество продуктов");
         }
 
-        var response = await fetch(ApplicationApiPaths.Buy, {
+        var response = await fetch(AppApiPaths.Buy, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'

@@ -1,4 +1,4 @@
-import { ApplicationApiPaths } from './AppConstants';
+import { AppApiPaths } from './AppConstants';
 
 export class AuthorizeService {
     _user = null;
@@ -14,7 +14,7 @@ export class AuthorizeService {
             return this._user;
         }
 
-        let response = await fetch(ApplicationApiPaths.IsUserAuthenticated, { method: 'POST' });
+        let response = await fetch(AppApiPaths.IsUserAuthenticated, { method: 'POST' });
         const user = await response.json();
 
         this.updateState(user);
@@ -28,7 +28,7 @@ export class AuthorizeService {
     }
 
     async signup(login, password, onSuccess, onError) {
-        let response = await fetch(ApplicationApiPaths.Register, {
+        let response = await fetch(AppApiPaths.Register, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -44,7 +44,7 @@ export class AuthorizeService {
     }
 
     async login(login, password, onSuccess, onError) {
-        let response = await fetch(ApplicationApiPaths.Login, {
+        let response = await fetch(AppApiPaths.Login, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -59,7 +59,7 @@ export class AuthorizeService {
     }
 
     async logout() {
-        await fetch(ApplicationApiPaths.Logout, { method: 'POST'});
+        await fetch(AppApiPaths.Logout, { method: 'POST'});
     }
 
     static get instance() { return authService }
