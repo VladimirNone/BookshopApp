@@ -23,6 +23,7 @@ export const AppPagePaths = {
 
 export const AppApiPaths = {
     Cart:                   `${apiOrderPrefix}/Cart`,
+    CartedProductCancel:    `${apiOrderPrefix}/Cart/Cancel`,
 
     Product:                `${apiProductPrefix}`,
     Buy:                    `${apiProductPrefix}/Buy`,

@@ -62,7 +62,7 @@ namespace BookshopApp.Controllers
 
             var cart = await _unitOfWork.OrdersRepository.GetUserCartAsync(user.Id);
 
-            cart.OrderedProducts.Find(h => h.Id == id).Cancelled = true;
+            cart.OrderedProducts.Find(h => h.ProductId == id).Cancelled = true;
 
             if (await _unitOfWork.Commit())
                 return Ok();

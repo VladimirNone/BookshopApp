@@ -56,11 +56,11 @@ export class Cart extends Component {
                             <button type="button" className="btn btn-primary btn-block">Оформить заказ</button>
                         </div>
                         <div className="row no-gutters mt-3">
-                            <h3>Продукты в корзине:</h3>
+                            <h3>Продуктов в корзине на </h3>
                         </div>
                     </div>
                 </div>
-                {cart.orderedProducts.map((prod, i) => <CartedCard key={i} product={prod.product} countOfDeferredProduct={prod.count}/>)}
+                {cart.orderedProducts.map((prod, i) => <CartedCard key={i} product={prod.product} countOfDeferredProduct={prod.count} updateCart={() => this.setState({ dataWasUpdated: false }) } />)}
                 <Pagination curPage={this.state.page} pageIsLast={this.state.pageIsLast} changePage={(newPage) => this.setState({ page: newPage, dataWasUpdated: false })} />
             </Fragment>);
     }
