@@ -3,10 +3,10 @@
     color: black;
 }
 
-.product_card, .carted_card:hover {
-    color: black;
-    text-decoration: none;
-}
+    .product_card:hover, .carted_card:hover {
+        color: black;
+        text-decoration: none;
+    }
 
 .product-description {
     text-indent: 2em;
