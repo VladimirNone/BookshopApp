@@ -13,6 +13,10 @@ namespace BookshopApp.Db
         public IOrderRepository OrdersRepository { get; }
         public IProductRepository ProductsRepository { get; }
 
+        /// <summary>
+        /// My implemantation use try/catch in the method. Catch cantains context.Dispose()
+        /// </summary>
+        /// <returns></returns>
         Task<bool> Commit();
         Task Rollback();
     }

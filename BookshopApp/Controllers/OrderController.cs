@@ -53,5 +53,38 @@ namespace BookshopApp.Controllers
 
             return Ok(new { cart = cartDto, pageIsLast });
         }
+
+        [Authorize]
+        [HttpPost("Cart/Cancel/{id:int}")]
+        public async Task<IActionResult> CancelCartedProduct(int id)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var cart = await _unitOfWork.OrdersRepository.GetUserCartAsync(user.Id);
+
+            cart.OrderedProducts.Find(h => h.Id == id).Cancelled = true;
+
+            if (await _unitOfWork.Commit())
+                return Ok();
+            else
+                return BadRequest();
+        }
+
+        [Authorize]
+        [HttpPost("Cart/PlaceOrder")]
+        public async Task<IActionResult> PlaceOrder()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var cart = await _unitOfWork.OrdersRepository.GetUserCartAsync(user.Id);
+
+            cart.StateId = (int)OrderStateEnum.Confirmed;
+            cart.DateOfOrdering = DateTime.Now;
+
+            if (await _unitOfWork.Commit())
+                return Ok();
+            else
+                return BadRequest();
+        }
     }
 }
