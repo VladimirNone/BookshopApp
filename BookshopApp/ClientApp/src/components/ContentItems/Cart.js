@@ -13,8 +13,10 @@ export class Cart extends Component {
             cart: null,
             pageIsLast: false,
             dataWasUpdated: true,
+            discountPercent: 0,
         }
 
+        this.handlePlaceAnOrder = this.handlePlaceAnOrder.bind(this);
     }
 
     componentDidMount() {
@@ -24,6 +26,28 @@ export class Cart extends Component {
     componentDidUpdate() {
         if (!this.state.dataWasUpdated)
             this.getProductsFromServer();
+    }
+
+    async handlePlaceAnOrder() {
+
+        if (this.state.cart.orderedProducts.length === 0) {
+            return alert("В корзине нет ни одного продукта");
+        }
+
+        var response = await fetch(AppApiPaths.PlaceAnOrder, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        });
+
+        if (!response.ok) {
+            console.log("error")
+        }
+        else {
+            alert("Заказ был успешно оформлен");
+            this.setState({ dataWasUpdated: false });
+        }
     }
 
     async getProductsFromServer() {
@@ -39,7 +63,7 @@ export class Cart extends Component {
             console.log("error");
         else {
             const answer = await response.json();
-            this.setState({ cart: answer.cart, pageIsLast: answer.pageIsLast, dataWasUpdated: true });
+            this.setState({ cart: answer.cart, pageIsLast: answer.pageIsLast, discountPercent: answer.discountPercent, dataWasUpdated: true });
         }
     }
 
@@ -53,10 +77,13 @@ export class Cart extends Component {
                 <div className="row mt-3 ">
                     <div className="col">
                         <div className="row no-gutters">
-                            <button type="button" className="btn btn-primary btn-block">Оформить заказ</button>
+                            <button type="button" className="btn btn-primary btn-block" onClick={this.handlePlaceAnOrder}>Оформить заказ</button>
                         </div>
                         <div className="row no-gutters mt-3">
-                            <h3>Продуктов в корзине на </h3>
+                            <h3>Продуктов в корзине на {cart.finalAmount}$</h3>
+                            {this.state.discountPercent != 0
+                                ? <h4>Скидка по дисконтной карте: {cart.finalAmount / 100 * this.state.discountPercent}$</h4>
+                                : <h4>У вас нет скидки по дисконтной карте</h4>}
                         </div>
                     </div>
                 </div>

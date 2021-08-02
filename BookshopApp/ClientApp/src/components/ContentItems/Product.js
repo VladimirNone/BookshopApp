@@ -54,7 +54,7 @@ export class Product extends Component {
             return alert("Нельзя заказывать отрицательное или нулевое количество продуктов");
         }
 
-        var response = await fetch(AppApiPaths.Buy, {
+        var response = await fetch(AppApiPaths.AddToCart, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'

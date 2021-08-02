@@ -8,7 +8,8 @@ namespace BookshopApp.Db
 {
     public interface IUserRepository : IRepository<User>
     {
-        public Task<bool> ContainsUserByEmail(string email);
-        public Task<bool> ContainsUserByUserName(string username);
+        Task AddDiscount(int userId, Discount discount);
+        Task<Discount> GetDiscount(int userId);
+        Task DecreaseDiscountNumbOfUses(int userId);
     }
 }

@@ -11,11 +11,13 @@ namespace BookshopApp.Db.Implementations
 {
     public abstract class Repository<T> : IRepository<T> where T: class, IEntity
     {
+        public IUnitOfWork UnitOfWork { get; protected set; }
         public DbSet<T> DbSet { get; protected set; }
         protected ApplicationDbContext AppDbContext { get; private set; }
 
-        public Repository(ApplicationDbContext dbContext)
+        public Repository(ApplicationDbContext dbContext, IUnitOfWork unitOfWork)
         {
+            UnitOfWork = unitOfWork;
             AppDbContext = dbContext;
             DbSet = dbContext.Set<T>();
         }

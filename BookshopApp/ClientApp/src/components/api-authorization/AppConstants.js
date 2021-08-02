@@ -24,9 +24,10 @@ export const AppPagePaths = {
 export const AppApiPaths = {
     Cart:                   `${apiOrderPrefix}/Cart`,
     CartedProductCancel:    `${apiOrderPrefix}/Cart/Cancel`,
+    PlaceAnOrder:           `${apiOrderPrefix}/Cart/PlaceAnOrder`,
+    AddToCart:              `${apiOrderPrefix}/AddToCart`,
 
     Product:                `${apiProductPrefix}`,
-    Buy:                    `${apiProductPrefix}/Buy`,
     Products:               `${apiProductPrefix}/Prods`,
 
     Login:                  `${apiAccountPrefix}/Login`,

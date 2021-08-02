@@ -10,6 +10,7 @@ namespace BookshopApp.Db
 {
     public interface IRepository<T> where T : class, IEntity
     {
+        IUnitOfWork UnitOfWork { get; }
         DbSet<T> DbSet { get; }
 
         Task AddEntityAsync(T entity);

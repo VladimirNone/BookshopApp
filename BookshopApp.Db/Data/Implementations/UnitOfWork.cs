@@ -18,17 +18,17 @@ namespace BookshopApp.Db.Implementations
 
         public IUserRepository UsersRepository
         {
-            get => _usersRepository ??= new UserRepository(_context);
+            get => _usersRepository ??= new UserRepository(_context, this);
         }
 
         public IOrderRepository OrdersRepository
         {
-            get => _ordersRepository ??= new OrderRepository(_context);
+            get => _ordersRepository ??= new OrderRepository(_context, this);
         }
 
         public IProductRepository ProductsRepository
         {
-            get => _productsRepository ??= new ProductRepository(_context);
+            get => _productsRepository ??= new ProductRepository(_context, this);
         }
 
         public UnitOfWork(ApplicationDbContext context, ILogger<UnitOfWork> logger)

@@ -8,6 +8,8 @@ namespace BookshopApp.Models
         public string FinalLocation { get; set; }
         public string ReasonForCancellation { get; set; }
 
+        public double FinalAmount { get; set; }
+
         public DateTime DateOfOrdering { get; set; }
         public DateTime DateOfClosing { get; set; }
 

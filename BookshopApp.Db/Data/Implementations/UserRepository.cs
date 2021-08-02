@@ -9,19 +9,25 @@ namespace BookshopApp.Db.Implementations
 {
     public class UserRepository : Repository<User>, IUserRepository
     {
-        public UserRepository(ApplicationDbContext context)
-            : base(context)
+        public UserRepository(ApplicationDbContext context, IUnitOfWork unitOfWork)
+            : base(context, unitOfWork)
         {
         }
 
-        public async Task<bool> ContainsUserByEmail(string email)
+        public async Task AddDiscount(int userId, Discount discount)
         {
-            return await DbSet.AnyAsync(h => h.Email == email);
+            (await GetEntityAsync(userId)).Discount = discount;
         }
 
-        public async Task<bool> ContainsUserByUserName(string username)
+        public async Task DecreaseDiscountNumbOfUses(int userId)
         {
-            return await DbSet.AnyAsync(h => h.UserName == username);
+            var discount = (await DbSet.Include(h => h.Discount).SingleOrDefaultAsync(h => h.Id == userId)).Discount;
+            if (discount?.NumberOfUses > 0)
+                discount.NumberOfUses--;
         }
+
+        public async Task<Discount> GetDiscount(int userId)
+            => (await DbSet.Include(h => h.Discount).AsNoTracking().SingleOrDefaultAsync(h=> h.Id == userId)).Discount;
+        
     }
 }

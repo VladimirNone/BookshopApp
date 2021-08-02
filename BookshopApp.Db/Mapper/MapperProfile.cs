@@ -27,9 +27,11 @@ namespace BookshopApp.Db.Mapper
 
             CreateMap<Order, OrderDto>()
                 .ForMember(h => h.Customer, g => g.MapFrom(src => src.Customer))
-                .ForMember(h => h.State, g => g.MapFrom(src => src.State));
+                .ForMember(h => h.State, g => g.MapFrom(src => src.State))
+                .ForMember(h => h.FinalAmount, g => g.MapFrom(src => Math.Round(src.FinalAmount, 2)));
             CreateMap<Order, CartDto>()
-                .ForMember(h => h.OrderedProducts, g => g.MapFrom(src => src.OrderedProducts));
+                .ForMember(h => h.OrderedProducts, g => g.MapFrom(src => src.OrderedProducts))
+                .ForMember(h => h.FinalAmount, g => g.MapFrom(src => Math.Round(src.FinalAmount, 2)));
         }
     }
 }
