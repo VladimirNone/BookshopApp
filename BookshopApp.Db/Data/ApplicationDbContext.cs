@@ -26,10 +26,10 @@ namespace BookshopApp.Db
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OrderState>().HasData(
-                new OrderState() { Id = 1, NameOfState = "IsCart" },
-                new OrderState() { Id = 2, NameOfState = "Confirmed" },
-                new OrderState() { Id = 3, NameOfState = "Completed" },
-                new OrderState() { Id = 4, NameOfState = "Cancelled" }
+                new OrderState() { Id = 1, NameOfState = "Корзина" },
+                new OrderState() { Id = 2, NameOfState = "Подтвержден" },
+                new OrderState() { Id = 3, NameOfState = "Завершен" },
+                new OrderState() { Id = 4, NameOfState = "Отменен" }
                 );
 
             modelBuilder.Entity<Product>().Property(h => h.LinkToImage).HasDefaultValue("/Images/no_foto.png");

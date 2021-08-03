@@ -47,11 +47,11 @@ namespace BookshopApp
                 await IdentityInitializer.InitializeUserAsync(userManager, "user@gmail.com", "123456", "user");
 
                 //Wiil create a new objects for each application launch. Need comment it
-                /*                    var dataGenerator = services.GetRequiredService<DataGenerator>();
-                                    var appDbContext = services.GetRequiredService<ApplicationDbContext>();
-                                    var env = services.GetRequiredService<IWebHostEnvironment>();
+                var dataGenerator = services.GetRequiredService<DataGenerator>();
+                var appDbContext = services.GetRequiredService<ApplicationDbContext>();
+                var env = services.GetRequiredService<IWebHostEnvironment>();
 
-                                    await IdentityInitializer.InitializeContent(dataGenerator, userManager, appDbContext, Path.Combine(env.ContentRootPath, "ClientApp", "Public", "Images"));*/
+                await IdentityInitializer.InitializeContent(dataGenerator, userManager, appDbContext, Path.Combine(env.ContentRootPath, "ClientApp", "Public", "Images"));
             }
             catch (Exception ex)
             {

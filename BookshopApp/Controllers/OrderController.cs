@@ -30,12 +30,25 @@ namespace BookshopApp.Controllers
         }
 
         [Authorize]
+        [HttpGet("Orders/{page:int}")]
+        public async Task<IActionResult> GetOrders(int page)
+        {
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            (var orders, var pageIsLast) = await _unitOfWork.OrdersRepository.GetOrders(userId, page, CountOfProductsOnPage);
+
+            var ordersDto = _mapper.Map<List<Order>>(orders);
+
+            return Ok(new { orders = ordersDto, pageIsLast });
+        }
+
+        [Authorize]
         [HttpGet("Cart/{page:int}")]
         public async Task<IActionResult> GetCart(int page)
         {
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            (var cart, var pageIsLast) = await _unitOfWork.OrdersRepository.GetOrCreateUserCartAsync(userId, page, CountOfProductsOnPage);
+            (var cart, var pageIsLast) = await _unitOfWork.OrdersRepository.GetOrCreateUserCart(userId, page, CountOfProductsOnPage);
 
             //Cart page don't provide description for product
             foreach (var item in cart.OrderedProducts)

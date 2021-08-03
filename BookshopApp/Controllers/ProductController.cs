@@ -31,7 +31,7 @@ namespace BookshopApp.Controllers
         [HttpGet("Prods/{page:int}")]
         public async Task<IActionResult> GetProducts(int page)
         {
-            (var prods, var pageIsLast) = await _unitOfWork.ProductsRepository.GetProductsAsync(page, CountOfProductsOnPage);
+            (var prods, var pageIsLast) = await _unitOfWork.ProductsRepository.GetProducts(page, CountOfProductsOnPage);
 
             var prodsDto = _mapper.Map<List<Product>>(prods);
 
@@ -47,7 +47,7 @@ namespace BookshopApp.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetProductById(int id)
         {
-            var productOut = _mapper.Map<ProductDto>(await _unitOfWork.ProductsRepository.GetFullProductAsync(id));
+            var productOut = _mapper.Map<ProductDto>(await _unitOfWork.ProductsRepository.GetFullProduct(id));
             return Ok(productOut);
         }
     }

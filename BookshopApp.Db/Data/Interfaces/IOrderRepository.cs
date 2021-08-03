@@ -8,11 +8,14 @@ namespace BookshopApp.Db
 {
     public interface IOrderRepository : IRepository<Order>
     {
-        Task<Order> GetOrCreateUserCartAsync(int userId);
-        Task<(Order, bool)> GetOrCreateUserCartAsync(int userId, int page, int count);
+        Task<Order> GetOrCreateUserCart(int userId);
+        Task<(Order, bool)> GetOrCreateUserCart(int userId, int page, int count);
+        Task<(List<Order>, bool)> GetOrders(int userId, int page, int count);
+
         Task CancelProductCart(int userId, int productId);
         Task AddToCart(int userId, int productId, int count);
         Task PlaceAnOrder(int userId);
+
         Task<Order> CreateCart(int userId);
     }
 }

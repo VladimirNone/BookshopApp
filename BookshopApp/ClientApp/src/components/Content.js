@@ -4,6 +4,7 @@ import { Product } from './ContentItems/Product';
 import { Cart } from './ContentItems/Cart';
 import { Route, Switch } from 'react-router';
 import { AppPagePaths } from './Api-authorization/AppConstants';
+import { OrderList } from './ContentItems/OrderList';
 
 export class Content extends Component {
 
@@ -19,6 +20,7 @@ export class Content extends Component {
                         <Route exact path='/' component={MainPage} />
                         <Route path={AppPagePaths.Product + '/:id'} component={Product} />
                         <Route path={AppPagePaths.Cart} component={Cart} />
+                        <Route path={AppPagePaths.Orders} component={OrderList} />
                     </Switch>
                 </div>
 

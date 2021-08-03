@@ -31,7 +31,7 @@ namespace BookshopApp.Db.Implementations
 
         public async Task AddToCart(int userId, int productId, int count)
         {
-            var cart = await GetOrCreateUserCartAsync(userId);
+            var cart = await GetOrCreateUserCart(userId);
             var orderedProduct = cart.OrderedProducts.Find(h => !h.Cancelled && h.ProductId == productId);
             if (orderedProduct == null)
             {
@@ -57,7 +57,9 @@ namespace BookshopApp.Db.Implementations
 
         public async Task PlaceAnOrder(int userId)
         {
-            var cart = await DbSet.Where(h => h.CustomerId == userId && h.StateId == (int)OrderStateEnum.IsCart).FirstOrDefaultAsync();
+            var cart = await DbSet
+                .Where(h => h.CustomerId == userId && h.StateId == (int)OrderStateEnum.IsCart)
+                .FirstOrDefaultAsync();
             
             cart.StateId = (int)OrderStateEnum.Confirmed;
             cart.DateOfOrdering = DateTime.Now;
@@ -73,7 +75,7 @@ namespace BookshopApp.Db.Implementations
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public async Task<Order> GetOrCreateUserCartAsync(int userId)
+        public async Task<Order> GetOrCreateUserCart(int userId)
         {
             var cartExist = await DbSet.Where(h => h.CustomerId == userId && h.StateId == (int)OrderStateEnum.IsCart).AsNoTracking().AnyAsync();
             if(!cartExist)
@@ -90,9 +92,10 @@ namespace BookshopApp.Db.Implementations
         /// <param name="count"></param>
         /// <returns>(cart with 'count' of OrderedProduct Items, pageIsLast) </returns>
         // Don't remove .AsNoTracking() //
-        public async Task<(Order, bool)> GetOrCreateUserCartAsync(int userId, int page, int count)
+        public async Task<(Order, bool)> GetOrCreateUserCart(int userId, int page, int count)
         {
-            var cart = await DbSet.Where(h => h.CustomerId == userId && h.StateId == (int)OrderStateEnum.IsCart)
+            var cart = await DbSet
+                .Where(h => h.CustomerId == userId && h.StateId == (int)OrderStateEnum.IsCart)
                 .Include(h => h.OrderedProducts.Where(h => !h.Cancelled).OrderBy(h => h.Product.Name).Skip(page * count).Take(count + 1))
                 .ThenInclude(h => h.Product)
                 .AsNoTracking()
@@ -116,7 +119,26 @@ namespace BookshopApp.Db.Implementations
             await AddEntityAsync(cart);
 
             return cart;
+        }
 
+        public async Task<(List<Order>, bool)> GetOrders(int userId, int page, int count)
+        {
+            var orders = await DbSet
+                .Where(h => h.CustomerId == userId && h.StateId != (int)OrderStateEnum.IsCart)
+                .Include(h => h.State)
+                .Skip(page * count)
+                .Take(count + 1)
+                .AsNoTracking()
+                .ToListAsync();
+
+            //we return count items, but for determining - Is this page the last? - we use this condition 
+            //if orders.Count() == (count + 1) then exist next page
+            var pageIsLast = orders.Count <= count;
+
+            if (!pageIsLast)
+                orders.Remove(orders.Last());
+
+            return (orders, pageIsLast);
         }
     }
 }

@@ -13,6 +13,8 @@ export const AppPagePaths = {
 
     Product:                `${productPrefix}`,
     Cart:                   `${orderPrefix}/Cart`,
+    Orders:                 `${orderPrefix}/Orders`,
+    Order:                  `${orderPrefix}`,
 
     Login:                  `${accounttPrefix}/Login`,
     Register:               `${accounttPrefix}/Signup`,
@@ -26,6 +28,7 @@ export const AppApiPaths = {
     CartedProductCancel:    `${apiOrderPrefix}/Cart/Cancel`,
     PlaceAnOrder:           `${apiOrderPrefix}/Cart/PlaceAnOrder`,
     AddToCart:              `${apiOrderPrefix}/AddToCart`,
+    Orders:                 `${apiOrderPrefix}/Orders`,
 
     Product:                `${apiProductPrefix}`,
     Products:               `${apiProductPrefix}/Prods`,

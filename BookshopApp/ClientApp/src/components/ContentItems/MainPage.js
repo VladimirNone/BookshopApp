@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { Searcher } from './SubComponents/Searcher';
-import { ProductCard } from './SubComponents/ProductCard';
-import { Pagination } from './SubComponents/Pagination';
+import { Searcher } from '../SubComponents/Searcher';
+import { ProductCard } from '../SubComponents/ProductCard';
+import { Pagination } from '../SubComponents/Pagination';
 import { AppApiPaths } from '../Api-authorization/AppConstants';
 
 export class MainPage extends Component {

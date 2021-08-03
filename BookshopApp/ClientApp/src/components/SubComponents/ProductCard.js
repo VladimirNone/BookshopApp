@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { AppPagePaths } from '../../Api-authorization/AppConstants';
+import { AppPagePaths } from '../Api-authorization/AppConstants';
 
 export class ProductCard extends Component {
 
@@ -19,7 +19,7 @@ export class ProductCard extends Component {
                             {/*Need use .text-truncate */}
                             <p className="card-text">{product.description}</p>
                             <p className="card-text text-right"><b>{product.price}$</b></p>
-                            <p className="card-text"><small className="text-muted">Опубликовано: {product.dateOfPublication}</small></p>
+                            <p className="card-text"><small className="text-muted">Опубликовано: {(new Date(product.dateOfPublication)).toLocaleString()}</small></p>
                         </div>
                     </div>
                 </div>

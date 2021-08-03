@@ -1,8 +1,7 @@
 ﻿import React, { Component, Fragment } from 'react';
-import { Pagination } from './SubComponents/Pagination';
+import { Pagination } from '../SubComponents/Pagination';
 import { AppApiPaths } from '../Api-authorization/AppConstants';
-import { ProductCard } from './SubComponents/ProductCard';
-import { CartedCard } from './SubComponents/CartedCard';
+import { CartedCard } from '../SubComponents/CartedCard';
 
 export class Cart extends Component {
     constructor(props) {
@@ -72,6 +71,14 @@ export class Cart extends Component {
         if (cart == null)
             return (<div />);
 
+        if (cart.orderedProducts.length === 0)
+            return (
+                <div className="row mt-3 ">
+                    <div className="col">
+                        <h3>Ваша корзина пуста</h3>
+                    </div>
+                </div>);
+
         return (
             <Fragment>
                 <div className="row mt-3 ">
@@ -87,7 +94,7 @@ export class Cart extends Component {
                         </div>
                     </div>
                 </div>
-                {cart.orderedProducts.map((prod, i) => <CartedCard key={i} product={prod.product} countOfDeferredProduct={prod.count} updateCart={() => this.setState({ dataWasUpdated: false }) } />)}
+                {cart.orderedProducts.map((prod, i) => <CartedCard key={i} product={prod.product} countOfDeferredProduct={prod.count} updateCart={() => this.setState({ dataWasUpdated: false })} />)}
                 <Pagination curPage={this.state.page} pageIsLast={this.state.pageIsLast} changePage={(newPage) => this.setState({ page: newPage, dataWasUpdated: false })} />
             </Fragment>);
     }

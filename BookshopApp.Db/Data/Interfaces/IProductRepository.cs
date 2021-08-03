@@ -8,7 +8,7 @@ namespace BookshopApp.Db
 {
     public interface IProductRepository : IRepository<Product>
     {
-        Task<(List<Product>, bool)> GetProductsAsync(int page, int count);
-        Task<Product> GetFullProductAsync(int id);
+        Task<(List<Product>, bool)> GetProducts(int page, int count);
+        Task<Product> GetFullProduct(int id);
     }
 }

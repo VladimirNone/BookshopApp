@@ -26,21 +26,23 @@ namespace BookshopApp.Db
         {
             if (await userManager.FindByEmailAsync(email) == null && await userManager.FindByNameAsync(email) == null)
             {
-                var admin = new User { Email = email, UserName = email };
-                var result = await userManager.CreateAsync(admin, password);
+                var user = new User { Email = email, UserName = email };
+                var result = await userManager.CreateAsync(user, password);
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(admin, "admin");
+                    await userManager.AddToRoleAsync(user, role);
                 }
             }
         }
 
         public static async Task InitializeContent(DataGenerator generator, UserManager<User> userManager, ApplicationDbContext context, string pathToImages)
         {
-            var users = generator.GenerateUsers(8);
+            var users = generator.GenerateUsers(8).ToList();
 
             foreach (var newUser in users)
                 await userManager.CreateAsync(newUser, newUser.PasswordHash);
+
+            users.AddRange(context.Users);
 
             var authors = generator.GenerateAuthors(10);
             var products = generator.GenerateProducts(35, pathToImages, authors.ToArray());

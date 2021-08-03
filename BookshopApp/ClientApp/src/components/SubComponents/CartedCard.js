@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { AppPagePaths, AppApiPaths } from '../../Api-authorization/AppConstants';
+import { AppPagePaths, AppApiPaths } from '../Api-authorization/AppConstants';
 
 export class CartedCard extends Component {
 
