@@ -37,5 +37,6 @@ export const AppApiPaths = {
     Register:               `${apiAccountPrefix}/Signup`,
     Profile:                `${apiAccountPrefix}/Profile`,
     Logout:                 `${apiAccountPrefix}/Logout`,
+    Permision:              `${apiAccountPrefix}/Permision`,
     IsUserAuthenticated:    `${apiAccountPrefix}/Check`,
 };

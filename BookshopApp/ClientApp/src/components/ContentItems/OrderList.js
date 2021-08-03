@@ -12,6 +12,7 @@ export class OrderList extends Component {
             orders: [],
             pageIsLast: false,
             dataWasUpdated: true,
+            access: false,
         }
     }
 
@@ -22,6 +23,23 @@ export class OrderList extends Component {
     componentDidUpdate() {
         if (!this.state.dataWasUpdated)
             this.getOrdersFromServer();
+    }
+
+    async getPermision() {
+        let response = await fetch(AppApiPaths.Permision, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            console.log("error")
+        }
+        else {
+            this.setState({ access: (await response.json()).access });
+        }
     }
 
     async getOrdersFromServer() {
@@ -55,13 +73,24 @@ export class OrderList extends Component {
                     </div>
                 </div>);
 
+        let hiddenButtons = (
+            <div>
+                <div className="d-flex justify-content-center mt-3 ">
+                    <div className="">
+                        <button>Мои заказы</button>
+                    </div>
+                    <div className="">
+                        <button>Все заказы</button>
+                    </div>
+                </div>
+            </div>);
+
         return (
             <Fragment>
-                <div className="row mt-3 ">
+                {this.state.access ? }
+                <div className="row no-gutters mt-3 ">
                     <div className="col">
-                        <div className="row no-gutters mt-3">
-                            <h3>Ваши заказы:</h3>
-                        </div>
+                        <h3>Ваши заказы:</h3>
                     </div>
                 </div>
                 {orders.map((order, i) => <OrderCard key={i} order={order} />)}
