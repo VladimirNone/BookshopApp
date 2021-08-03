@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import { AppPagePaths, AppApiPaths } from '../Api-authorization/AppConstants';
 
-export class CartedCard extends Component {
+export class OrderedProductCard extends Component {
 
     constructor(props) {
         super(props);

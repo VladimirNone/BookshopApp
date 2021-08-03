@@ -1,9 +1,9 @@
 /* Provide sufficient contrast against white background */
-.product_card, .carted_card, .ordered_card {
+.product_card, .carted_card, .ordered_card, .order_card {
     color: black;
 }
 
-    .product_card:hover, .carted_card:hover, .ordered_card:hover {
+    .product_card:hover, .carted_card:hover, .ordered_card:hover, .order_card:hover {
         color: black;
         text-decoration: none;
     }

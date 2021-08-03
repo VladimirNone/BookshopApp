@@ -29,6 +29,8 @@ export const AppApiPaths = {
     PlaceAnOrder:           `${apiOrderPrefix}/Cart/PlaceAnOrder`,
     AddToCart:              `${apiOrderPrefix}/AddToCart`,
     Orders:                 `${apiOrderPrefix}/Orders`,
+    Order:                  `${apiOrderPrefix}`,
+    GlobalOrders:           `${apiOrderPrefix}/GlobalOrders`,
 
     Product:                `${apiProductPrefix}`,
     Products:               `${apiProductPrefix}/Prods`,
@@ -37,6 +39,6 @@ export const AppApiPaths = {
     Register:               `${apiAccountPrefix}/Signup`,
     Profile:                `${apiAccountPrefix}/Profile`,
     Logout:                 `${apiAccountPrefix}/Logout`,
-    Permision:              `${apiAccountPrefix}/Permision`,
+    Permission:             `${apiAccountPrefix}/Permission`,
     IsUserAuthenticated:    `${apiAccountPrefix}/Check`,
 };

@@ -17,6 +17,8 @@ namespace BookshopApp.Db.Mapper
 
             CreateMap<Author, AuthorDto>();
             CreateMap<AuthorDto, Author>();
+
+            CreateMap<User, UserPrivateDto>();
             
             CreateMap<Product, ProductDto>()
                 .ForMember(h => h.Author, g=>g.MapFrom(src => src.Author));
@@ -27,6 +29,7 @@ namespace BookshopApp.Db.Mapper
 
             CreateMap<Order, OrderDto>()
                 .ForMember(h => h.Customer, g => g.MapFrom(src => src.Customer))
+                .ForMember(h => h.OrderedProducts, g => g.MapFrom(src => src.OrderedProducts))
                 .ForMember(h => h.State, g => g.MapFrom(src => src.State))
                 .ForMember(h => h.FinalAmount, g => g.MapFrom(src => Math.Round(src.FinalAmount, 2)));
             CreateMap<Order, CartDto>()

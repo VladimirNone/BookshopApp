@@ -10,7 +10,9 @@ namespace BookshopApp.Db
     {
         Task<Order> GetOrCreateUserCart(int userId);
         Task<(Order, bool)> GetOrCreateUserCart(int userId, int page, int count);
+        Task<(Order, bool)> GetOrder(int orderId, int page, int count);
         Task<(List<Order>, bool)> GetOrders(int userId, int page, int count);
+        Task<(List<Order>, bool)> GetOrders(int page, int count);
 
         Task CancelProductCart(int userId, int productId);
         Task AddToCart(int userId, int productId, int count);

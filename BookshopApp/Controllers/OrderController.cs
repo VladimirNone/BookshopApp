@@ -37,7 +37,29 @@ namespace BookshopApp.Controllers
 
             (var orders, var pageIsLast) = await _unitOfWork.OrdersRepository.GetOrders(userId, page, CountOfProductsOnPage);
 
-            var ordersDto = _mapper.Map<List<Order>>(orders);
+            var ordersDto = _mapper.Map<List<OrderDto>>(orders);
+
+            return Ok(new { orders = ordersDto, pageIsLast });
+        }
+
+        [Authorize]
+        [HttpGet("{id:int}/{page:int}")]
+        public async Task<IActionResult> GetOrder(int id, int page)
+        {
+            (var order, var pageIsLast) = await _unitOfWork.OrdersRepository.GetOrder(id, page, CountOfProductsOnPage);
+
+            var ordersDto = _mapper.Map<OrderDto>(order);
+
+            return Ok(new { order = ordersDto, pageIsLast });
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpGet("GlobalOrders/{page:int}")]
+        public async Task<IActionResult> GetGlobalOrders(int page)
+        {
+            (var orders, var pageIsLast) = await _unitOfWork.OrdersRepository.GetOrders(page, CountOfProductsOnPage);
+
+            var ordersDto = _mapper.Map<List<OrderDto>>(orders);
 
             return Ok(new { orders = ordersDto, pageIsLast });
         }

@@ -63,6 +63,7 @@ namespace BookshopApp.Db.Implementations
             
             cart.StateId = (int)OrderStateEnum.Confirmed;
             cart.DateOfOrdering = DateTime.Now;
+            cart.DateOfClosing = DateTime.Now + TimeSpan.FromDays(7);
 
             await UnitOfWork.UsersRepository.DecreaseDiscountNumbOfUses(userId);
 
@@ -112,6 +113,24 @@ namespace BookshopApp.Db.Implementations
             return (cart, pageIsLast);
         }
 
+        public async Task<(Order, bool)> GetOrder(int orderId, int page, int count)
+        {
+            var order = await DbSet
+                .Where(h => h.Id == orderId)
+                .Include(h => h.State)
+                .Include(h => h.OrderedProducts.Where(h => !h.Cancelled).OrderBy(h => h.Product.Name).Skip(page * count).Take(count + 1))
+                .ThenInclude(h => h.Product)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+
+            var pageIsLast = order.OrderedProducts.Count <= count;
+
+            if (!pageIsLast)
+                order.OrderedProducts.Remove(order.OrderedProducts.Last());
+
+            return (order, pageIsLast);
+        }
+
         public async Task<Order> CreateCart(int userId)
         {
             var cart = new Order() { CustomerId = userId, StateId = (int)OrderStateEnum.IsCart, OrderedProducts = new List<OrderedProduct>() };
@@ -126,6 +145,27 @@ namespace BookshopApp.Db.Implementations
             var orders = await DbSet
                 .Where(h => h.CustomerId == userId && h.StateId != (int)OrderStateEnum.IsCart)
                 .Include(h => h.State)
+                .Skip(page * count)
+                .Take(count + 1)
+                .AsNoTracking()
+                .ToListAsync();
+
+            //we return count items, but for determining - Is this page the last? - we use this condition 
+            //if orders.Count() == (count + 1) then exist next page
+            var pageIsLast = orders.Count <= count;
+
+            if (!pageIsLast)
+                orders.Remove(orders.Last());
+
+            return (orders, pageIsLast);
+        }
+
+        public async Task<(List<Order>, bool)> GetOrders(int page, int count)
+        {
+            var orders = await DbSet
+                .Where(h => h.StateId != (int)OrderStateEnum.IsCart)
+                .Include(h => h.State)
+                .Include(h=>h.Customer)
                 .Skip(page * count)
                 .Take(count + 1)
                 .AsNoTracking()

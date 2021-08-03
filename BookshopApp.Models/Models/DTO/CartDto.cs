@@ -13,6 +13,6 @@ namespace BookshopApp.Models.DTO
 
         public double FinalAmount { get; set; }
 
-        public List<OrderedProduct> OrderedProducts { get; set; }
+        public List<CartProductDto> OrderedProducts { get; set; }
     }
 }

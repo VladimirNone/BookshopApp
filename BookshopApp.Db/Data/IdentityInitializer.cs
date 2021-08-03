@@ -49,6 +49,12 @@ namespace BookshopApp.Db
             var orders = generator.GenerateOrders(15, users.ToArray());
             var orderedProds = generator.GenerateOrderedProducts(100, orders.ToArray(), products.ToArray());
 
+            foreach (var order in orders)
+            {
+                var localOrderProds = orderedProds.Where(h => h.Order.Id == order.Id).ToArray();
+                order.FinalAmount = localOrderProds.Sum(h => h.Count * h.Product.Price);
+            }
+
             await context.OrderedProducts.AddRangeAsync(orderedProds);
             await context.SaveChangesAsync();
         }

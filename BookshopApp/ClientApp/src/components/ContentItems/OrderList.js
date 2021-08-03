@@ -13,11 +13,13 @@ export class OrderList extends Component {
             pageIsLast: false,
             dataWasUpdated: true,
             access: false,
+            orderSourse: AppApiPaths.Orders,
         }
     }
 
     componentDidMount() {
         this.getOrdersFromServer();
+        this.getPermission();
     }
 
     componentDidUpdate() {
@@ -25,12 +27,11 @@ export class OrderList extends Component {
             this.getOrdersFromServer();
     }
 
-    async getPermision() {
-        let response = await fetch(AppApiPaths.Permision, {
+    async getPermission() {
+        let response = await fetch(AppApiPaths.Permission, {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Content-Type': 'application/json;charset=utf-8'
             }
         });
 
@@ -44,7 +45,7 @@ export class OrderList extends Component {
 
     async getOrdersFromServer() {
         //The server pagination starts from zero
-        let response = await fetch(AppApiPaths.Orders + '/' + (this.state.page - 1), {
+        let response = await fetch(this.state.orderSourse + '/' + (this.state.page - 1), {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -64,36 +65,38 @@ export class OrderList extends Component {
         if (orders == null)
             return (<div />);
 
-        //need check it. If server return 0 orders, client will get null or empty array?
-        if (orders.length === 0)
-            return (
-                <div className="row mt-3 ">
-                    <div className="col">
-                        <h3>У вас нет заказов</h3>
-                    </div>
-                </div>);
-
         let hiddenButtons = (
             <div>
                 <div className="d-flex justify-content-center mt-3 ">
-                    <div className="">
-                        <button>Мои заказы</button>
+                    <div className="mr-2">
+                        <button type="button" className="btn btn-light" onClick={() => this.setState({ orderSourse: AppApiPaths.Orders, page: 1, dataWasUpdated: false })}>Мои заказы</button>
                     </div>
-                    <div className="">
-                        <button>Все заказы</button>
+                    <div className="ml-2">
+                        <button type="button" className="btn btn-light" onClick={() => this.setState({ orderSourse: AppApiPaths.GlobalOrders, page: 1, dataWasUpdated: false })}>Все заказы</button>
                     </div>
                 </div>
             </div>);
 
+        if (orders.length === 0)
+            return (
+                <Fragment>
+                    { this.state.access ? hiddenButtons : null}
+                    <div className="row mt-3 ">
+                        <div className="col">
+                            <h3>У вас нет заказов</h3>
+                        </div>
+                    </div>
+                </Fragment>);
+
         return (
             <Fragment>
-                {this.state.access ? }
+                {this.state.access ? hiddenButtons : null}
                 <div className="row no-gutters mt-3 ">
                     <div className="col">
-                        <h3>Ваши заказы:</h3>
+                        <h3>Заказы:</h3>
                     </div>
                 </div>
-                {orders.map((order, i) => <OrderCard key={i} order={order} />)}
+                {orders.map((order, i) => <OrderCard key={i} order={order} admin={this.state.access }/>)}
                 <Pagination curPage={this.state.page} pageIsLast={this.state.pageIsLast} changePage={(newPage) => this.setState({ page: newPage, dataWasUpdated: false })} />
             </Fragment>);
     }

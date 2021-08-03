@@ -19,5 +19,7 @@ namespace BookshopApp.Models.DTO
         public UserPrivateDto Customer { get; set; }
 
         public OrderState State { get; set; }
+
+        public List<CartProductDto> OrderedProducts { get; set; }
     }
 }

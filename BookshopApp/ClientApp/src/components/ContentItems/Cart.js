@@ -1,7 +1,7 @@
 ﻿import React, { Component, Fragment } from 'react';
 import { Pagination } from '../SubComponents/Pagination';
 import { AppApiPaths } from '../Api-authorization/AppConstants';
-import { CartedCard } from '../SubComponents/CartedCard';
+import { OrderedProductCard } from '../SubComponents/OrderedProductCard';
 
 export class Cart extends Component {
     constructor(props) {
@@ -94,7 +94,7 @@ export class Cart extends Component {
                         </div>
                     </div>
                 </div>
-                {cart.orderedProducts.map((prod, i) => <CartedCard key={i} product={prod.product} countOfDeferredProduct={prod.count} updateCart={() => this.setState({ dataWasUpdated: false })} />)}
+                {cart.orderedProducts.map((prod, i) => <OrderedProductCard key={i} product={prod.product} countOfDeferredProduct={prod.count} updateCart={() => this.setState({ dataWasUpdated: false })} />)}
                 <Pagination curPage={this.state.page} pageIsLast={this.state.pageIsLast} changePage={(newPage) => this.setState({ page: newPage, dataWasUpdated: false })} />
             </Fragment>);
     }

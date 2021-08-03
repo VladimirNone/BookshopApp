@@ -29,8 +29,8 @@ namespace BookshopApp.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("Permision")]
-        public IActionResult Permision()
+        [HttpPost("Permission")]
+        public IActionResult Permission()
         {
             return Ok(new { access = User.IsInRole("admin") });
         }
