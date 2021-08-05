@@ -68,7 +68,7 @@ export class Cart extends Component {
 
     render() {
         const cart = this.state.cart;
-        if (cart == null)
+        if (cart === null)
             return (<div />);
 
         if (cart.orderedProducts.length === 0)
@@ -88,7 +88,7 @@ export class Cart extends Component {
                         </div>
                         <div className="row no-gutters mt-3">
                             <h3>Продуктов в корзине на {cart.finalAmount}$</h3>
-                            {this.state.discountPercent != 0
+                            {this.state.discountPercent !== 0
                                 ? <h4>Скидка по дисконтной карте: {cart.finalAmount / 100 * this.state.discountPercent}$</h4>
                                 : <h4>У вас нет скидки по дисконтной карте</h4>}
                         </div>

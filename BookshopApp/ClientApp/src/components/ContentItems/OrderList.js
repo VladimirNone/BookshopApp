@@ -1,7 +1,9 @@
 ﻿import React, { Component, Fragment } from 'react';
 import { Pagination } from '../SubComponents/Pagination';
-import { AppApiPaths } from '../Api-authorization/AppConstants';
+import { AppApiPaths, AppPagePaths } from '../Api-authorization/AppConstants';
 import { OrderCard } from '../SubComponents/OrderCard';
+import authService from '../Api-authorization/AuthorizeService';
+import { Link } from 'react-router-dom';
 
 export class OrderList extends Component {
     constructor(props) {
@@ -28,19 +30,7 @@ export class OrderList extends Component {
     }
 
     async getPermission() {
-        let response = await fetch(AppApiPaths.Permission, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            }
-        });
-
-        if (!response.ok) {
-            console.log("error")
-        }
-        else {
-            this.setState({ access: (await response.json()).access });
-        }
+        authService.checkPermission((res) => this.setState({ access: res.access }), (error) => console.log("error"));
     }
 
     async getOrdersFromServer() {
@@ -73,6 +63,9 @@ export class OrderList extends Component {
                     </div>
                     <div className="ml-2">
                         <button type="button" className="btn btn-light" onClick={() => this.setState({ orderSourse: AppApiPaths.GlobalOrders, page: 1, dataWasUpdated: false })}>Все заказы</button>
+                    </div>
+                    <div className="ml-2">
+                        <Link className="btn btn-light" to={AppPagePaths.ProductManipulator + "/" + 0}>Новый продукт</Link>
                     </div>
                 </div>
             </div>);

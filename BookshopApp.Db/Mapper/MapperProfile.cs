@@ -22,7 +22,8 @@ namespace BookshopApp.Db.Mapper
             
             CreateMap<Product, ProductDto>()
                 .ForMember(h => h.Author, g=>g.MapFrom(src => src.Author));
-            CreateMap<ProductDto, Product>();
+            CreateMap<ProductInputDto, Product>()
+                .ForMember(h => h.AuthorId, g => g.MapFrom(src => src.AuthorId));
 
             CreateMap<OrderedProduct, CartProductDto>()
                 .ForMember(h => h.Product, g => g.MapFrom(src => src.Product));

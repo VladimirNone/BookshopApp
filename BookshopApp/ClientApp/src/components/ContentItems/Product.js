@@ -1,6 +1,8 @@
 ﻿import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router';
-import { AppApiPaths } from '../Api-authorization/AppConstants';
+import { AppApiPaths, AppPagePaths } from '../Api-authorization/AppConstants';
+import authService from '../Api-authorization/AuthorizeService';
+import { Link } from 'react-router-dom';
 
 export class Product extends Component {
 
@@ -12,6 +14,7 @@ export class Product extends Component {
             product: null,
             quantityProdForBuy: 1,
             redirect: false,
+            access: false,
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,6 +23,7 @@ export class Product extends Component {
 
     componentDidMount() {
         this.getProductFromServer();
+        this.getPermission();
     }
 
     async getProductFromServer() {
@@ -37,6 +41,10 @@ export class Product extends Component {
             const answer = await response.json();
             this.setState({ product: answer });
         }
+    }
+
+    async getPermission() {
+        authService.checkPermission((res) => this.setState({ access: res.access }), (error) => console.log("error"));
     }
 
     handleInputChange(e) {
@@ -85,17 +93,17 @@ export class Product extends Component {
                     <img src={product.linkToImage} alt="no foto" width="100%" />
                 </div>
                 <div className="row mx-2 mt-3">
-                    <div className="product-details-content-area">
-                        <div className="product-details-text">
+                    <div className="col">
+                        <div className="">
                             <h4 className="">{product.name}</h4>
                             <h5 className="">Автор: {product.author.firstName + " " + product.author.lastName}</h5>
                             <div className="d-flex mb-3 mr-3">
                                 <h5 className="flex-grow-1">В наличии: {product.countInStock}</h5>
                                 <h5 className=""><b>{product.price}$</b></h5>
                             </div>
-                            <p className="product-description text-justify">{product.description}</p>
+                            <p className="text-justify">{product.description}</p>
                         </div>
-                        <div className="product-buy d-flex justify-content-end input-group ">
+                        <div className="d-flex justify-content-end input-group ">
                             <form className="form-inline mr-3">
                                 <div className="form-group mb-2">
                                     <p className="form-control-plaintext"><span>Количество</span></p>
@@ -106,6 +114,13 @@ export class Product extends Component {
                                 <button type="button" className="btn btn-primary mb-2" onClick={() => this.handleSubmit()}>Добавить в корзину</button>
                             </form>
                         </div>
+                        {this.state.access
+                            && <div className=" mt-3">
+                                <hr className="mb-3" />
+                                <Link className="btn btn-primary btn-block" to={AppPagePaths.ProductManipulator + "/" + this.state.productId}>
+                                    Изменить
+                                </Link>
+                            </div>}
                     </div>
                 </div>
             </Fragment>);

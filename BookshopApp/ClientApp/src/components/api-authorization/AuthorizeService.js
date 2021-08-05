@@ -27,6 +27,22 @@ export class AuthorizeService {
         this._isAuthenticated = !!this._user.username;
     }
 
+    async checkPermission(onSuccess, onError) {
+        let response = await fetch(AppApiPaths.Permission, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        });
+
+        if (!response.ok) {
+            onError(await response.json());
+        }
+        else {
+            onSuccess(await response.json());
+        }
+    }
+
     async signup(login, password, onSuccess, onError) {
         let response = await fetch(AppApiPaths.Register, {
             method: 'POST',

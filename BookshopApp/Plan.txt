@@ -8,7 +8,7 @@
 + Контроллер для данных о товарах
 + Изменения архитектуры приложения (отдельный проект для моделей...)
 
-- Отправка данных с помощью post через html http://htmlbook.ru/html/form (заюзать onsubmit http://htmlbook.ru/html/attr/event для redirect)
+- Отправка данных с помощью post через html http://htmlbook.ru/html/form (заюзать onsubmit http://htmlbook.ru/html/attr/event для redirect) - Product
 
 ? jwt-токены https://fuse8.ru/articles/using-asp-net-core-identity-and-jwt
 
@@ -27,4 +27,4 @@ Trim double numbers (numbs were calculated on front-end)
 		+ Для пользователя
 		+ Для админа
 		- Возможность изменить продукт
-	+ Возможность создать продукт
+	- Возможность создать продукт
