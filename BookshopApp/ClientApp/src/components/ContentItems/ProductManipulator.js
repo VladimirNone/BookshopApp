@@ -10,12 +10,9 @@ export class ProductManipulator extends Component {
         this.state = {
             productId: parseInt(props.match.params.id),
             product: null,
-            quantityProdForBuy: 1,
-            redirect: false,
-            access: false,
+            authors: [],
         }
 
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -35,16 +32,13 @@ export class ProductManipulator extends Component {
         }
         else {
             const answer = await response.json();
-            this.setState({ product: answer.product });
+            this.setState({ product: answer.product, authors: answer.authors });
         }
-    }
-
-    async handleSubmit() {
-        this.setState({ redirect: true });
     }
 
     render() {
         let product = this.state.product;
+        let authors = this.state.authors;
         let productIsNew = false;
 
         if (this.state.productId == 0) {
@@ -56,9 +50,6 @@ export class ProductManipulator extends Component {
 
         if (product == null)
             return (<div/>)
-
-        if (this.state.redirect)
-            return (<Redirect to={'/'} />);
 
         return (
             <Fragment>
@@ -79,11 +70,9 @@ export class ProductManipulator extends Component {
                                 </div>
                                 <div className="col-lg-9 mb-3">
                                     <label>Автор</label>
-                                    <select name="AuthorId" className="custom-select" defaultValue={conditionProduct("", 1)}>
-                                        <option value="">Выбрать...</option>
-                                        <option value="1">Один</option>
-                                        <option value="2">Два</option>
-                                        <option value="3">Три</option>
+                                    <select name="AuthorId" className="custom-select" defaultValue={conditionProduct("", product.author.id)}>
+                                        <option value="0">Выбрать...</option>
+                                        {authors.map((item, i) => <option value={item.id} key={i}>{ item.firstName + " " + item.lastName}</option>)}
                                     </select>
                                 </div>
                             </div>

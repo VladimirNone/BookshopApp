@@ -9,12 +9,13 @@ namespace BookshopApp.Db
 {
     public interface IUnitOfWork
     {
-        public IUserRepository UsersRepository { get; }
-        public IOrderRepository OrdersRepository { get; }
-        public IProductRepository ProductsRepository { get; }
+        IUserRepository UsersRepository { get; }
+        IOrderRepository OrdersRepository { get; }
+        IProductRepository ProductsRepository { get; }
+        IAuthorRepository AuthorsRepository { get; }
 
         /// <summary>
-        /// My implemantation use try/catch in the method. Catch cantains context.Dispose()
+        /// My implemantation use try/catch in the method. Catch cantains context.DisposeAsync()
         /// </summary>
         /// <returns></returns>
         Task<bool> Commit();

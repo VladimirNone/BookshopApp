@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookshopApp.Models.DTO
 {
-    public class AuthorDto
+    public class AuthorDto : Entity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

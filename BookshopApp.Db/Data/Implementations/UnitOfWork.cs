@@ -13,6 +13,7 @@ namespace BookshopApp.Db.Implementations
         private IUserRepository _usersRepository;
         private IOrderRepository _ordersRepository;
         private IProductRepository _productsRepository;
+        private IAuthorRepository _authorsRepository;
         private ApplicationDbContext _context { get; }
         private ILogger<UnitOfWork> _logger { get; }
 
@@ -29,6 +30,11 @@ namespace BookshopApp.Db.Implementations
         public IProductRepository ProductsRepository
         {
             get => _productsRepository ??= new ProductRepository(_context, this);
+        }
+
+        public IAuthorRepository AuthorsRepository
+        {
+            get => _authorsRepository ??= new AuthorRepository(_context, this);
         }
 
         public UnitOfWork(ApplicationDbContext context, ILogger<UnitOfWork> logger)

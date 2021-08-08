@@ -56,53 +56,45 @@ namespace BookshopApp.Controllers
             return Ok(productOut);
         }
 
-        [HttpGet("ProductManipulator/{id:int}")]
+        [HttpGet("ProductChange/{id:int}")]
         public async Task<IActionResult> GetProductAndAuthors(int id)
         {
             var productOut = _mapper.Map<ProductDto>(await _unitOfWork.ProductsRepository.GetFullProduct(id));
+            var authorsOut = _mapper.Map<List<AuthorDto>>(await _unitOfWork.AuthorsRepository.GetAuthors());
             
-            return Ok(new { product = productOut, authors = "data"});
+            return Ok(new { product = productOut, authors = authorsOut });
         }
 
-            [HttpPost("ProductManipulator/{id:int}")]
-        public async Task<IActionResult> ProductManipulator(int id, [FromForm] ProductInputDto uploadedData)
+        [HttpPost("ProductCreate")]
+        public async Task<IActionResult> ProductCreate([FromForm] ProductInputDto uploadedData)
         {
-            //костыль. Сделал по 2-м причинам:
-            //1 - нужно было по тз заюзать хоть раз отправку форм средствами html (т.е. через form)
-            //2 - проблемы с временем
-            //Если id=0, значит необходимо создавать новый объект
-            if(id == 0)
+            var product = _mapper.Map<Product>(uploadedData);
+            if (uploadedData.ImageFile != null)
             {
-                var product = _mapper.Map<Product>(uploadedData);
-                await SaveImageAndAssignField(product);
-                await _unitOfWork.ProductsRepository.AddEntityAsync(product);
+                product.LinkToImage = await _unitOfWork.ProductsRepository.SaveImage(_environment.ContentRootPath, uploadedData.ImageFile);
             }
+            await _unitOfWork.ProductsRepository.AddEntityAsync(product);
+
+            if (await _unitOfWork.Commit())
+                return Ok();
             else
+                return BadRequest();
+        }
+
+        [HttpPut("ProductChange/{id:int}")]
+        public async Task<IActionResult> ProductChange(int id, [FromForm] ProductInputDto uploadedData)
+        {
+            var productFromDb = await _unitOfWork.ProductsRepository.GetEntityAsync(id);
+            productFromDb = _mapper.Map(uploadedData, productFromDb);
+            if (uploadedData.ImageFile != null)
             {
-                var productFromDb = await _unitOfWork.ProductsRepository.GetEntityAsync(id);
-                productFromDb = _mapper.Map(uploadedData, productFromDb);
-                await SaveImageAndAssignField(productFromDb);
+                productFromDb.LinkToImage = await _unitOfWork.ProductsRepository.SaveImage(_environment.ContentRootPath, uploadedData.ImageFile);
             }
 
             if (await _unitOfWork.Commit())
                 return Redirect("/");
             else
                 return BadRequest();
-
-
-            async Task SaveImageAndAssignField(Product prod)
-            {
-                if (uploadedData.ImageFile != null)
-                {
-                    var linkToImage = Path.Combine("Images", uploadedData.ImageFile.FileName);
-                    var path = Path.Combine(_environment.ContentRootPath, "ClientApp", "public", linkToImage);
-
-                    using var fileStream = new FileStream(path, FileMode.Create);
-                    await uploadedData.ImageFile.CopyToAsync(fileStream);
-
-                    prod.LinkToImage = linkToImage;
-                }
-            }
         }
     }
 }

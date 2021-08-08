@@ -1,7 +1,9 @@
 ﻿using BookshopApp.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -49,6 +51,15 @@ namespace BookshopApp.Db.Implementations
         public async Task<Product> GetFullProduct(int id)
             => await DbSet.Where(h => !h.Deleted && h.Id == id).Include(h => h.Author).AsNoTracking().SingleOrDefaultAsync();
 
+        public async Task<string> SaveImage(string contentRootPath, IFormFile imageFile)
+        {
+            var linkToImage = Path.Combine("Images", imageFile.FileName);
+            var path = Path.Combine(contentRootPath, "ClientApp", "public", linkToImage);
 
+            using var fileStream = new FileStream(path, FileMode.Create);
+            await imageFile.CopyToAsync(fileStream);
+
+            return linkToImage;
+        }
     }
 }
