@@ -10,7 +10,6 @@ export class ProductCreate extends Component {
             authors: [],
             fileInputText: "Выбрать файл...",
         }
-
     }
 
     componentDidMount() {
@@ -81,8 +80,8 @@ export class ProductCreate extends Component {
                             </div>
                             <div className="input-group mb-3">
                                 <div className="custom-file">
-                                    <input id="customFile" name="ImageFile" type="file" onChange={(e) => this.setState({ fileInputText: e.currentTarget.value.split('\\').pop() })} className="custom-file-input" />
-                                    <label className="custom-file-label" for="customFile">{this.state.fileInputText}</label>
+                                    <input name="ImageFile" className="custom-file-input" type="file" onChange={(e) => this.setState({ fileInputText: e.currentTarget.value.split('\\').pop() })} />
+                                    <label className="custom-file-label">{this.state.fileInputText}</label>
                                 </div>
                             </div>
                             <button className="btn btn-primary" type="submit">Отправить форму</button>

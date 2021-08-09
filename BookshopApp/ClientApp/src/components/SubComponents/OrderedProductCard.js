@@ -53,7 +53,7 @@ export class OrderedProductCard extends Component {
                     </div>
                 </Link>
                 <div className="row no-gutters mt-3">
-                    <div className="col-md text-center"><h5><b>Итого: {countOfDeferredProduct * product.price}$</b></h5></div>
+                    <div className="col-md text-center"><h5><b>Итого: {Math.round(((countOfDeferredProduct * product.price) + Number.EPSILON) * 100) / 100 }$</b></h5></div>
                     <div className="col-md"><button type="button" className="btn btn-secondary btn-block" onClick={() => this.handleCancel()}>Отказаться</button></div>
                 </div>
             </div>);

@@ -13,8 +13,10 @@ export class Product extends Component {
             productId: parseInt(props.match.params.id),
             product: null,
             quantityProdForBuy: 1,
-            redirect: false,
+            redirectToMainPage: false,
+            redirectToLoginPage: false,
             access: false,
+            isAuthenticated: false,
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,6 +26,8 @@ export class Product extends Component {
     componentDidMount() {
         this.getProductFromServer();
         this.getPermission();
+        this.checkAuth();
+
     }
 
     async getProductFromServer() {
@@ -44,7 +48,11 @@ export class Product extends Component {
     }
 
     async getPermission() {
-        authService.checkPermission((res) => this.setState({ access: res.access }), (error) => console.log("error"));
+        await authService.checkPermission((res) => this.setState({ access: res.access }), (error) => console.log("error"));
+    }
+
+    async checkAuth() {
+        this.setState({ isAuthenticated: await authService.isAuthenticated() });
     }
 
     handleInputChange(e) {
@@ -54,6 +62,11 @@ export class Product extends Component {
     }
 
     async handleSubmit() {
+        if (!this.state.isAuthenticated) {
+            this.setState({ redirectToLoginPage: true });
+            return;
+        }
+
         if (this.state.quantityProdForBuy > this.state.product.countInStock) {
             return alert("В наличии нет желаемого количества продуктов");
         }
@@ -74,18 +87,21 @@ export class Product extends Component {
             console.log("error")
         }
         else {
-            this.setState({ redirect: true });
+            this.setState({ redirectToMainPage: true });
         }
     }
 
     render() {
         const product = this.state.product;
 
+        if (this.state.redirectToMainPage)
+            return (<Redirect to={'/'} />);
+
+        if (this.state.redirectToLoginPage)
+            return (<Redirect to={AppPagePaths.Login} />);
+
         if (product == null)
             return (<div />);
-
-        if (this.state.redirect)
-            return (<Redirect to={'/'} />);
 
         return (
             <Fragment>

@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { LoginMenu } from './SubComponents/LoginMenu';
 import './NavMenu.css';
 import { AppPagePaths } from './Api-authorization/AppConstants';
+import authService from './Api-authorization/AuthorizeService';
+import 'bootstrap';
 
 export class NavMenu extends Component {
     static displayName = NavMenu.name;
@@ -13,8 +15,17 @@ export class NavMenu extends Component {
 
         this.toggleNavbar = this.toggleNavbar.bind(this);
         this.state = {
-            collapsed: true
+            collapsed: true,
+            access: false,
         };
+    }
+
+    componentDidMount() {
+        this.getPermission();
+    }
+
+    async getPermission() {
+        authService.checkPermission((res) => this.setState({ access: res.access }), (error) => console.error("NavMenu. getPermission()"));
     }
 
     toggleNavbar() {
@@ -32,14 +43,16 @@ export class NavMenu extends Component {
                         <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                         <Collapse className="d-lg-inline-flex flex-lg-row-reverse" isOpen={!this.state.collapsed} navbar>
                             <ul className="navbar-nav flex-grow">
+
+                                {this.state.access && <NavItem className="dropdown">
+                                    <NavLink className="dropdown-toggle text-dark" data-toggle="dropdown">Админ панель</NavLink>
+                                    <div className="dropdown-menu">
+                                        <NavLink tag={Link} className="dropdown-item text-dark" to={AppPagePaths.ProductCreate}>Новый продукт</NavLink>
+                                    </div>
+                                </NavItem>}
+
                                 <NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/">На главную</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to={AppPagePaths.Cart}>Корзина</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to={AppPagePaths.Orders}>Заказы </NavLink>
                                 </NavItem>
                                 <LoginMenu>
                                 </LoginMenu>
@@ -51,3 +64,4 @@ export class NavMenu extends Component {
         );
     }
 }
+

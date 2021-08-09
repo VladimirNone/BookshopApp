@@ -3,7 +3,6 @@ import { Pagination } from '../SubComponents/Pagination';
 import { AppApiPaths, AppPagePaths } from '../Api-authorization/AppConstants';
 import { OrderCard } from '../SubComponents/OrderCard';
 import authService from '../Api-authorization/AuthorizeService';
-import { Link } from 'react-router-dom';
 
 export class OrderList extends Component {
     constructor(props) {
@@ -30,7 +29,7 @@ export class OrderList extends Component {
     }
 
     async getPermission() {
-        authService.checkPermission((res) => this.setState({ access: res.access }), (error) => console.log("error"));
+        authService.checkPermission((res) => this.setState({ access: res.access }), (error) => console.error("OrderList. getPermission()"));
     }
 
     async getOrdersFromServer() {
@@ -43,7 +42,7 @@ export class OrderList extends Component {
         });
 
         if (!response.ok)
-            console.log("error");
+            console.error("OrderList. getOrdersFromServer()");
         else {
             const answer = await response.json();
             this.setState({ orders: answer.orders, pageIsLast: answer.pageIsLast, dataWasUpdated: true });
@@ -64,16 +63,13 @@ export class OrderList extends Component {
                     <div className="ml-2">
                         <button type="button" className="btn btn-light" onClick={() => this.setState({ orderSourse: AppApiPaths.GlobalOrders, page: 1, dataWasUpdated: false })}>Все заказы</button>
                     </div>
-                    <div className="ml-2">
-                        <Link className="btn btn-light" to={AppPagePaths.ProductCreate}>Новый продукт</Link>
-                    </div>
                 </div>
             </div>);
 
         if (orders.length === 0)
             return (
                 <Fragment>
-                    { this.state.access ? hiddenButtons : null}
+                    {this.state.access && hiddenButtons}
                     <div className="row mt-3 ">
                         <div className="col">
                             <h3>У вас нет заказов</h3>
@@ -83,7 +79,7 @@ export class OrderList extends Component {
 
         return (
             <Fragment>
-                {this.state.access ? hiddenButtons : null}
+                {this.state.access && hiddenButtons}
                 <div className="row no-gutters mt-3 ">
                     <div className="col">
                         <h3>Заказы:</h3>
