@@ -31,7 +31,7 @@ namespace BookshopApp.Db.Implementations
 
         public async Task AddToCart(int userId, int productId, int count)
         {
-            var cart = await GetOrCreateUserCart(userId);
+            var cart = await GetOrCreateUserCartTracked(userId);
             var orderedProduct = cart.OrderedProducts.Find(h => !h.Cancelled && h.ProductId == productId);
             if (orderedProduct == null)
             {
@@ -48,7 +48,7 @@ namespace BookshopApp.Db.Implementations
                 cart.FinalAmount += count * orderedProduct.Product.Price;
             }
 
-            var discount = await UnitOfWork.UsersRepository.GetDiscount(userId);
+            var discount = await UnitOfWork.UsersRepository.GetDiscountNoTracked(userId);
             if (discount != null && discount.NumberOfUses != 0) {
                 cart.FinalAmount -= (cart.FinalAmount / 100) * discount.Percent;
                 discount.NumberOfUses--;
@@ -71,29 +71,17 @@ namespace BookshopApp.Db.Implementations
                 await UnitOfWork.UsersRepository.AddDiscount(userId, new Discount() { Percent = 5, NumberOfUses = 1 });
         }
 
-        /// <summary>
-        /// For back-end. Tracked
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public async Task<Order> GetOrCreateUserCart(int userId)
+        public async Task<Order> GetOrCreateUserCartTracked(int userId)
         {
             var cartExist = await DbSet.Where(h => h.CustomerId == userId && h.StateId == (int)OrderStateEnum.IsCart).AsNoTracking().AnyAsync();
             if(!cartExist)
-                return await CreateCart(userId);
+                return await CreateCartTracked(userId);
 
             return await DbSet.Where(h => h.CustomerId == userId && h.StateId == (int)OrderStateEnum.IsCart).Include(h => h.OrderedProducts).ThenInclude(h => h.Product).FirstOrDefaultAsync();
         }
 
-        /// <summary>
-        /// For front-end display for user. Used .AsNoTracking() 
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="page"></param>
-        /// <param name="count"></param>
-        /// <returns>(cart with 'count' of OrderedProduct Items, pageIsLast) </returns>
-        // Don't remove .AsNoTracking() //
-        public async Task<(Order, bool)> GetOrCreateUserCart(int userId, int page, int count)
+        // Don't remove .AsNoTracking()
+        public async Task<(Order, bool)> GetOrCreateUserCartNoTracked(int userId, int page, int count)
         {
             var cart = await DbSet
                 .Where(h => h.CustomerId == userId && h.StateId == (int)OrderStateEnum.IsCart)
@@ -103,7 +91,7 @@ namespace BookshopApp.Db.Implementations
                 .FirstOrDefaultAsync();
 
             if(cart == null)
-                cart = await CreateCart(userId);
+                cart = await CreateCartTracked(userId);
 
             var pageIsLast = cart.OrderedProducts.Count <= count;
 
@@ -113,7 +101,7 @@ namespace BookshopApp.Db.Implementations
             return (cart, pageIsLast);
         }
 
-        public async Task<(Order, bool)> GetOrder(int orderId, int page, int count)
+        public async Task<(Order, bool)> GetOrderNoTracked(int orderId, int page, int count)
         {
             var order = await DbSet
                 .Where(h => h.Id == orderId)
@@ -131,7 +119,7 @@ namespace BookshopApp.Db.Implementations
             return (order, pageIsLast);
         }
 
-        public async Task<Order> CreateCart(int userId)
+        public async Task<Order> CreateCartTracked(int userId)
         {
             var cart = new Order() { CustomerId = userId, StateId = (int)OrderStateEnum.IsCart, OrderedProducts = new List<OrderedProduct>() };
 
@@ -140,7 +128,7 @@ namespace BookshopApp.Db.Implementations
             return cart;
         }
 
-        public async Task<(List<Order>, bool)> GetOrders(int userId, int page, int count)
+        public async Task<(List<Order>, bool)> GetOrdersNoTracked(int userId, int page, int count)
         {
             var orders = await DbSet
                 .Where(h => h.CustomerId == userId && h.StateId != (int)OrderStateEnum.IsCart)
@@ -160,7 +148,7 @@ namespace BookshopApp.Db.Implementations
             return (orders, pageIsLast);
         }
 
-        public async Task<(List<Order>, bool)> GetOrders(int page, int count)
+        public async Task<(List<Order>, bool)> GetOrdersNoTracked(int page, int count)
         {
             var orders = await DbSet
                 .Where(h => h.StateId != (int)OrderStateEnum.IsCart)

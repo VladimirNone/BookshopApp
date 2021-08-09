@@ -36,7 +36,7 @@ namespace BookshopApp.Controllers
         [HttpGet("Prods/{page:int}")]
         public async Task<IActionResult> GetProducts(int page)
         {
-            (var prods, var pageIsLast) = await _unitOfWork.ProductsRepository.GetProducts(page, CountOfProductsOnPage);
+            (var prods, var pageIsLast) = await _unitOfWork.ProductsRepository.GetProductsNoTracked(page, CountOfProductsOnPage);
 
             var prodsDto = _mapper.Map<List<Product>>(prods);
 
@@ -52,22 +52,24 @@ namespace BookshopApp.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetProductById(int id)
         {
-            var productOut = _mapper.Map<ProductDto>(await _unitOfWork.ProductsRepository.GetFullProduct(id));
+            var productOut = _mapper.Map<ProductDto>(await _unitOfWork.ProductsRepository.GetFullProductNoTracked(id));
             return Ok(productOut);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet("ProductManipulateInfo/{id:int?}")]
         public async Task<IActionResult> GetProductAndAuthors(int? id)
         {
             ProductDto productOut = null;
             if (id != null)
-                productOut = _mapper.Map<ProductDto>(await _unitOfWork.ProductsRepository.GetFullProduct((int)id));
+                productOut = _mapper.Map<ProductDto>(await _unitOfWork.ProductsRepository.GetFullProductNoTracked((int)id));
 
-            var authorsOut = _mapper.Map<List<AuthorDto>>(await _unitOfWork.AuthorsRepository.GetAuthors());
+            var authorsOut = _mapper.Map<List<AuthorDto>>(await _unitOfWork.AuthorsRepository.GetAuthorsNoTracked());
             
             return Ok(new { product = productOut, authors = authorsOut });
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost("ProductCreate")]
         public async Task<IActionResult> ProductCreate([FromForm] ProductInputDto uploadedData)
         {
@@ -85,6 +87,7 @@ namespace BookshopApp.Controllers
                 return BadRequest();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPut("ProductChange/{id:int}")]
         public async Task<IActionResult> ProductChange(int id, [FromForm] ProductInputDto uploadedData)
         {

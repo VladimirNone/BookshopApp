@@ -35,7 +35,7 @@ namespace BookshopApp.Controllers
         {
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            (var orders, var pageIsLast) = await _unitOfWork.OrdersRepository.GetOrders(userId, page, CountOfProductsOnPage);
+            (var orders, var pageIsLast) = await _unitOfWork.OrdersRepository.GetOrdersNoTracked(userId, page, CountOfProductsOnPage);
 
             var ordersDto = _mapper.Map<List<OrderDto>>(orders);
 
@@ -46,7 +46,7 @@ namespace BookshopApp.Controllers
         [HttpGet("{id:int}/{page:int}")]
         public async Task<IActionResult> GetOrder(int id, int page)
         {
-            (var order, var pageIsLast) = await _unitOfWork.OrdersRepository.GetOrder(id, page, CountOfProductsOnPage);
+            (var order, var pageIsLast) = await _unitOfWork.OrdersRepository.GetOrderNoTracked(id, page, CountOfProductsOnPage);
 
             var ordersDto = _mapper.Map<OrderDto>(order);
 
@@ -57,7 +57,7 @@ namespace BookshopApp.Controllers
         [HttpGet("GlobalOrders/{page:int}")]
         public async Task<IActionResult> GetGlobalOrders(int page)
         {
-            (var orders, var pageIsLast) = await _unitOfWork.OrdersRepository.GetOrders(page, CountOfProductsOnPage);
+            (var orders, var pageIsLast) = await _unitOfWork.OrdersRepository.GetOrdersNoTracked(page, CountOfProductsOnPage);
 
             var ordersDto = _mapper.Map<List<OrderDto>>(orders);
 
@@ -70,7 +70,7 @@ namespace BookshopApp.Controllers
         {
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            (var cart, var pageIsLast) = await _unitOfWork.OrdersRepository.GetOrCreateUserCart(userId, page, CountOfProductsOnPage);
+            (var cart, var pageIsLast) = await _unitOfWork.OrdersRepository.GetOrCreateUserCartNoTracked(userId, page, CountOfProductsOnPage);
 
             //Cart page don't provide description for product
             foreach (var item in cart.OrderedProducts)
@@ -78,7 +78,7 @@ namespace BookshopApp.Controllers
 
             var cartDto = _mapper.Map<CartDto>(cart);
 
-            var discount = await _unitOfWork.UsersRepository.GetDiscount(userId);
+            var discount = await _unitOfWork.UsersRepository.GetDiscountNoTracked(userId);
 
             return Ok(new { cart = cartDto, pageIsLast, discountPercent = (discount == null || discount.NumberOfUses == 0) ? 0: discount.Percent });
         }

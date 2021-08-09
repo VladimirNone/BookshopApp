@@ -26,7 +26,7 @@ namespace BookshopApp.Db.Implementations
                 discount.NumberOfUses--;
         }
 
-        public async Task<Discount> GetDiscount(int userId)
+        public async Task<Discount> GetDiscountNoTracked(int userId)
             => (await DbSet.Include(h => h.Discount).AsNoTracking().SingleOrDefaultAsync(h=> h.Id == userId)).Discount;
         
     }

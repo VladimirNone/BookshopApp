@@ -9,8 +9,8 @@ namespace BookshopApp.Db
 {
     public interface IProductRepository : IRepository<Product>
     {
-        Task<(List<Product>, bool)> GetProducts(int page, int count);
-        Task<Product> GetFullProduct(int id);
+        Task<(List<Product>, bool)> GetProductsNoTracked(int page, int count);
+        Task<Product> GetFullProductNoTracked(int id);
         Task<string> SaveImage(string contentRootPath, IFormFile imageFile);
     }
 }

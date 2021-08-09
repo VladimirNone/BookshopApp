@@ -17,7 +17,7 @@ namespace BookshopApp.Db.Implementations
 
         }
 
-        public async Task<List<Author>> GetAuthors()
+        public async Task<List<Author>> GetAuthorsNoTracked()
         {
             return await DbSet.AsNoTracking().ToListAsync();
         }

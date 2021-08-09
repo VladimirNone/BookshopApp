@@ -9,6 +9,6 @@ namespace BookshopApp.Db
 {
     public interface IAuthorRepository : IRepository<Author>
     {
-        Task<List<Author>> GetAuthors();
+        Task<List<Author>> GetAuthorsNoTracked();
     }
 }

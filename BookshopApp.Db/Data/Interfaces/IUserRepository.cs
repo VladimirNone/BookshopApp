@@ -9,7 +9,7 @@ namespace BookshopApp.Db
     public interface IUserRepository : IRepository<User>
     {
         Task AddDiscount(int userId, Discount discount);
-        Task<Discount> GetDiscount(int userId);
+        Task<Discount> GetDiscountNoTracked(int userId);
         Task DecreaseDiscountNumbOfUses(int userId);
     }
 }
