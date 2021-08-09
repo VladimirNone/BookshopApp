@@ -28,3 +28,4 @@ Trim double numbers (numbs were calculated on front-end)
 		+ Для админа
 		- Возможность изменить продукт
 	- Возможность создать продукт
+		- Пункт в меню

@@ -56,10 +56,13 @@ namespace BookshopApp.Controllers
             return Ok(productOut);
         }
 
-        [HttpGet("ProductChange/{id:int}")]
-        public async Task<IActionResult> GetProductAndAuthors(int id)
+        [HttpGet("ProductManipulateInfo/{id:int?}")]
+        public async Task<IActionResult> GetProductAndAuthors(int? id)
         {
-            var productOut = _mapper.Map<ProductDto>(await _unitOfWork.ProductsRepository.GetFullProduct(id));
+            ProductDto productOut = null;
+            if (id != null)
+                productOut = _mapper.Map<ProductDto>(await _unitOfWork.ProductsRepository.GetFullProduct((int)id));
+
             var authorsOut = _mapper.Map<List<AuthorDto>>(await _unitOfWork.AuthorsRepository.GetAuthors());
             
             return Ok(new { product = productOut, authors = authorsOut });
@@ -76,7 +79,8 @@ namespace BookshopApp.Controllers
             await _unitOfWork.ProductsRepository.AddEntityAsync(product);
 
             if (await _unitOfWork.Commit())
-                return Ok();
+                //i don't know how do it in front-end part.
+                return Redirect("/");
             else
                 return BadRequest();
         }
@@ -92,7 +96,7 @@ namespace BookshopApp.Controllers
             }
 
             if (await _unitOfWork.Commit())
-                return Redirect("/");
+                return Ok();
             else
                 return BadRequest();
         }

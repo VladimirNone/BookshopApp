@@ -12,7 +12,8 @@ const apiOrderPrefix = `${apiPrefix}${orderPrefix}`
 export const AppPagePaths = {
 
     Product:                `${productPrefix}`,
-    ProductManipulator:     `${productPrefix}/ProductManipulator`,
+    ProductChange:          `${productPrefix}/ProductChange`,
+    ProductCreate:          `${productPrefix}/ProductCreate`,
     Cart:                   `${orderPrefix}/Cart`,
     Orders:                 `${orderPrefix}/Orders`,
     Order:                  `${orderPrefix}`,
@@ -35,7 +36,9 @@ export const AppApiPaths = {
 
     Product:                `${apiProductPrefix}`,
     Products:               `${apiProductPrefix}/Prods`,
-    ProductManipulator:     `${apiProductPrefix}/ProductManipulator`,
+    ProductManipulateInfo:  `${apiProductPrefix}/ProductManipulateInfo`,
+    ProductChange:          `${apiProductPrefix}/ProductChange`,
+    ProductCreate:          `${apiProductPrefix}/ProductCreate`,
 
     Login:                  `${apiAccountPrefix}/Login`,
     Register:               `${apiAccountPrefix}/Signup`,

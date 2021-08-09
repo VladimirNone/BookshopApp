@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BookshopApp.Controllers
@@ -39,9 +40,7 @@ namespace BookshopApp.Controllers
         [HttpPost("Check")]
         public IActionResult Check()
         {
-            //maybe will be proplems if user delete a cookie. Need test
-            var b = _signInManager.IsSignedIn(HttpContext.User);
-            return Ok(new { username = _userManager.GetUserAsync(HttpContext.User).Result?.UserName });
+            return Ok(new { username = User.FindFirstValue(ClaimTypes.Name) });
         }
 
         [AllowAnonymous]

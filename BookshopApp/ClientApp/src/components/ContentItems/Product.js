@@ -116,8 +116,8 @@ export class Product extends Component {
                         </div>
                         {this.state.access
                             && <div className=" mt-3">
-                                <hr className="mb-3" />
-                                <Link className="btn btn-primary btn-block" to={AppPagePaths.ProductManipulator + "/" + this.state.productId}>
+                            <hr className="mb-3" />
+                            <Link className="btn btn-primary btn-block" to={AppPagePaths.ProductChange + "/" + this.state.productId}>
                                     Изменить
                                 </Link>
                             </div>}

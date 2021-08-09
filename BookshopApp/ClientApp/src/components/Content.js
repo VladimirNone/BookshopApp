@@ -6,7 +6,8 @@ import { Route, Switch } from 'react-router';
 import { AppPagePaths } from './Api-authorization/AppConstants';
 import { OrderList } from './ContentItems/OrderList';
 import { Order } from './ContentItems/Order';
-import { ProductManipulator } from './ContentItems/ProductManipulator';
+import { ProductCreate } from './ContentItems/ProductCreate';
+import { ProductChange } from './ContentItems/ProductChange';
 
 export class Content extends Component {
     render() {
@@ -20,7 +21,8 @@ export class Content extends Component {
                 <div className="col-md-7 border">
                     <Switch>
                         <Route exact path='/' component={MainPage} />
-                        <Route path={AppPagePaths.ProductManipulator + '/:id'} component={ProductManipulator} />
+                        <Route path={AppPagePaths.ProductChange + '/:id'} component={ProductChange} />
+                        <Route path={AppPagePaths.ProductCreate} component={ProductCreate} />
                         <Route path={AppPagePaths.Product + '/:id'} component={Product} />
                         <Route path={AppPagePaths.Cart} component={Cart} />
                         <Route path={AppPagePaths.Orders} component={OrderList} />

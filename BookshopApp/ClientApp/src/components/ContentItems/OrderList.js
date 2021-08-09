@@ -65,7 +65,7 @@ export class OrderList extends Component {
                         <button type="button" className="btn btn-light" onClick={() => this.setState({ orderSourse: AppApiPaths.GlobalOrders, page: 1, dataWasUpdated: false })}>Все заказы</button>
                     </div>
                     <div className="ml-2">
-                        <Link className="btn btn-light" to={AppPagePaths.ProductManipulator + "/" + 0}>Новый продукт</Link>
+                        <Link className="btn btn-light" to={AppPagePaths.ProductCreate}>Новый продукт</Link>
                     </div>
                 </div>
             </div>);
