@@ -2,7 +2,7 @@
 ## Использованные технологии
 Front-end part. Используется React в связке с Bootstrap. 
 
-Back-end part. Используется Asp.Net Core, Entity Framework Core для БД (а также CodeFirst для манипуляции структуры БД)
+Back-end part. Используется Asp.Net Core, Entity Framework Core для БД (а также CodeFirst для манипуляции структуры БД), ASP.NET Core Identity.
 ## Первый запуск
 Перед запуском приложения необходимо создать базу данных. Сделать это можно с помощью Package Manager Console, а именно использовав команду Update-database или использовав альтернативную команду в консоли.
 
@@ -15,9 +15,14 @@ Back-end part. Используется Asp.Net Core, Entity Framework Core дл
         host.Run();
     }
   
-Данный метод находится в классе Program. 
+Данный метод находится в классе Program. В нем можно увидеть создание обычного пользователя и админа, а также логины и пароли для них.
+
+    await IdentityInitializer.InitializeUserAsync(userManager, "admin@gmail.com", "123456", "admin");
+    await IdentityInitializer.InitializeUserAsync(userManager, "user@gmail.com", "123456", "user");
 
 Однако стоит обратить внимание на то, что данный метод будет генерировать данные при каждом запуске. Поэтому после нескольких запусков его следует закомитить. 
+
+Помимо этого, необходимо с помощью, к примеру, nmp скачать пакеты для front-end part of app.
 ## Общее описание программы
 Программа разделена на несколько контекстов для того, чтобы каждый можно было использовать в иных продуктах.
 
