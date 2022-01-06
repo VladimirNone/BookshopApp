@@ -11,6 +11,5 @@ namespace BookshopApp.Db
     {
         Task<(List<Product>, bool)> GetProductsNoTracked(int page, int count);
         Task<Product> GetFullProductNoTracked(int id);
-        Task<string> SaveImage(string contentRootPath, IFormFile imageFile);
     }
 }

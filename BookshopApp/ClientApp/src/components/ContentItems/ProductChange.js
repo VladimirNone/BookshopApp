@@ -14,6 +14,7 @@ export class ProductChange extends Component {
             redirect: false,
             fileInputText: "Выбрать файл...",
             errors: [],
+            badWords: ["наркотик","порно","пистолет"],
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,6 +28,17 @@ export class ProductChange extends Component {
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
+
+        let nameOfProd = formData.get("name").toLowerCase();
+        let descriptionOfProd = formData.get("description").toLowerCase();
+        
+        for (let i = 0; i < this.state.badWords.length; i++) {
+            if (nameOfProd.includes(this.state.badWords[i]) || descriptionOfProd.includes(this.state.badWords[i])) {
+                alert("Вы использовали запрещенное слово (" + this.state.badWords[i] + ")");
+
+                return;
+            }
+        }
 
         let response = await fetch(AppApiPaths.ProductChange + "/" + this.state.productId, {
             method: 'PUT',

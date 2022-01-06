@@ -1,5 +1,6 @@
 using BookshopApp.Db;
-using BookshopApp.Db.Generator;
+using BookshopApp.Infrastructure;
+using BookshopApp.Infrastructure.Generator;
 using BookshopApp.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;

@@ -1,5 +1,6 @@
 using BookshopApp.Db;
 using BookshopApp.Db.Mapper;
+using BookshopApp.Infrastructure;
 using BookshopApp.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace BookshopApp
 {
@@ -53,7 +55,8 @@ namespace BookshopApp
 
             services.AddAutoMapper(typeof(MapperProfile));
 
-            services.AddInfrastructure();
+            services.AddDbServices();
+            services.AddInfrastructureServices();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

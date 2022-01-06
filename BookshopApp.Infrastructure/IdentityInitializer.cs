@@ -1,4 +1,5 @@
-﻿using BookshopApp.Db.Generator;
+﻿using BookshopApp.Db;
+using BookshopApp.Infrastructure.Generator;
 using BookshopApp.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -6,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookshopApp.Db
+namespace BookshopApp.Infrastructure
 {
     public class IdentityInitializer
     {

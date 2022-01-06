@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookshopApp.Db;
+using BookshopApp.Infrastructure.Interfaces;
 using BookshopApp.Models;
 using BookshopApp.Models.DTO;
 using BookshopApp.Models.Models.DTO;
@@ -22,13 +23,15 @@ namespace BookshopApp.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IFileHandler _fileHandler;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _environment;
         private int CountOfProductsOnPage = 10;
 
-        public ProductController(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env)
+        public ProductController(IUnitOfWork unitOfWork, IFileHandler fileHandler, IMapper mapper, IWebHostEnvironment env)
         {
             _unitOfWork = unitOfWork;
+            _fileHandler = fileHandler;
             _mapper = mapper;
             _environment = env;
         }
@@ -76,7 +79,7 @@ namespace BookshopApp.Controllers
             var product = _mapper.Map<Product>(uploadedData);
             if (uploadedData.ImageFile != null)
             {
-                product.LinkToImage = await _unitOfWork.ProductsRepository.SaveImage(_environment.ContentRootPath, uploadedData.ImageFile);
+                product.LinkToImage = await _fileHandler.SaveImage(_environment.ContentRootPath, uploadedData.ImageFile);
             }
             await _unitOfWork.ProductsRepository.AddEntityAsync(product);
 
@@ -95,7 +98,7 @@ namespace BookshopApp.Controllers
             productFromDb = _mapper.Map(uploadedData, productFromDb);
             if (uploadedData.ImageFile != null)
             {
-                productFromDb.LinkToImage = await _unitOfWork.ProductsRepository.SaveImage(_environment.ContentRootPath, uploadedData.ImageFile);
+                productFromDb.LinkToImage = await _fileHandler.SaveImage(_environment.ContentRootPath, uploadedData.ImageFile);
             }
 
             if (await _unitOfWork.Commit())
