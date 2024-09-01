@@ -1,5 +1,4 @@
-﻿using BookshopApp.Db.Generator;
-using BookshopApp.Db.Implementations;
+﻿using BookshopApp.Db.Implementations;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -11,9 +10,8 @@ namespace BookshopApp.Db
 {
     public static class ServiceRegistration
     {
-        public static void AddInfrastructure(this IServiceCollection services)
+        public static void AddDbServices(this IServiceCollection services)
         {
-            services.AddTransient<DataGenerator>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
     }

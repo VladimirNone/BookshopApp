@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookshopApp.Db.Generator
+namespace BookshopApp.Infrastructure.Generator
 {
     public class ObjectGenerator
     {

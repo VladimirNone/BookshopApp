@@ -50,13 +50,12 @@ namespace BookshopApp.Controllers
             var user = await _userManager.FindByEmailAsync(loginQuery.Login);
             if(user.Email == "admin@gmail.com")
             {
-                var res = await _signInManager.PasswordSignInAsync(user, "123456", true, false);
+                var res = await _signInManager.PasswordSignInAsync(user, loginQuery.Password, true, false);
                 if (res.Succeeded)
                 {
                     return Ok();
                 }
             }
-
 
             if(user == null)
             {

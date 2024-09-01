@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bogus;
+using BookshopApp.Db;
 using BookshopApp.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace BookshopApp.Db.Generator
+namespace BookshopApp.Infrastructure.Generator
 {
     public class DataGenerator
     {

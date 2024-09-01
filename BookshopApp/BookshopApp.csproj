@@ -43,6 +43,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookshopApp.Db\BookshopApp.Db.csproj" />
+    <ProjectReference Include="..\BookshopApp.Infrastructure\BookshopApp.Infrastructure.csproj" />
     <ProjectReference Include="..\BookshopApp.Models\BookshopApp.Models.csproj" />
   </ItemGroup>
 
