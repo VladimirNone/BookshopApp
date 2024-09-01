@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookshopApp.Models", "Books
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookshopApp.Db", "BookshopApp.Db\BookshopApp.Db.csproj", "{BBEDFC7D-FF2C-4A10-9861-E82BF898B318}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookshopApp.Infrastructure", "BookshopApp.Infrastructure\BookshopApp.Infrastructure.csproj", "{076E19EE-A108-4D52-BAD1-D742D0073B62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookshopApp.Infrastructure", "BookshopApp.Infrastructure\BookshopApp.Infrastructure.csproj", "{076E19EE-A108-4D52-BAD1-D742D0073B62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BookshopApp.Db.ApplicationDbContext" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAIAAAAAAAAAEABAAAAAAwAAAAAAAAQ=</HashCode>
+      <FileName>Data\ApplicationDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BookshopApp.Db.IdentityInitializer" Collapsed="true">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAIAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Data\IdentityInitializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BookshopApp.Db.ServiceRegistration" Collapsed="true">
+    <Position X="13.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>ServiceRegistration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BookshopApp.Db.Generator.DataGenerator" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAACAAABAAAACAAAAAAAEAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Data\DataGenerator\DataGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BookshopApp.Db.Generator.ObjectGenerator" Collapsed="true">
+    <Position X="11.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAECAABAAAAAAAAAAAAAAAAAEAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Data\DataGenerator\GeneratorObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BookshopApp.Db.Implementations.AuthorRepository" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Implementations\AuthorRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BookshopApp.Db.Implementations.OrderRepository" Collapsed="true">
+    <Position X="5" Y="3.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAEAEAAAAAAAAAAAAgAQAAAAAABAAAAAAAAAAgCA=</HashCode>
+      <FileName>Data\Implementations\OrderRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BookshopApp.Db.Implementations.ProductRepository" Collapsed="true">
+    <Position X="8" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGBA=</HashCode>
+      <FileName>Data\Implementations\ProductRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BookshopApp.Db.Implementations.Repository&lt;T&gt;" Collapsed="true">
+    <Position X="3.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAQAAAAAAAAAAAAAAAAAAgAgAIgAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Data\Implementations\Repository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BookshopApp.Db.Implementations.UnitOfWork" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAEAAAIAABABCAAAAAAAAIAACAgAAAAAgAAAAAIA=</HashCode>
+      <FileName>Data\Implementations\UnitOfWork.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BookshopApp.Db.Implementations.UserRepository" Collapsed="true">
+    <Position X="2.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAABAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Implementations\UserRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BookshopApp.Db.Mapper.MapperProfile" Collapsed="true">
+    <Position X="9.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mapper\MapperProfile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BookshopApp.Models.Entity" Collapsed="true">
+    <Position X="6" Y="7" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BookshopApp.Models.Author" Collapsed="true">
+    <Position X="9.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BookshopApp.Models.Discount" Collapsed="true">
+    <Position X="0.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BookshopApp.Models.Order" Collapsed="true">
+    <Position X="2.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BookshopApp.Models.OrderedProduct" Collapsed="true">
+    <Position X="7.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BookshopApp.Models.OrderState" Collapsed="true">
+    <Position X="11.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BookshopApp.Models.OrderStateEnum" Collapsed="true">
+    <Position X="15.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BookshopApp.Models.Product" Collapsed="true">
+    <Position X="5" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BookshopApp.Models.Role" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BookshopApp.Models.User" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="BookshopApp.Db.IAuthorRepository" Collapsed="true">
+    <Position X="0.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Interfaces\IAuthorRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BookshopApp.Db.IOrderRepository" Collapsed="true">
+    <Position X="5.25" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAEAEAAAAAAAAAAAAgAQAAAAAABAAAAAAAAAAgCA=</HashCode>
+      <FileName>Data\Interfaces\IOrderRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BookshopApp.Db.IProductRepository" Collapsed="true">
+    <Position X="7.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGBA=</HashCode>
+      <FileName>Data\Interfaces\IProductRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BookshopApp.Db.IRepository&lt;T&gt;" Collapsed="true">
+    <Position X="4.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAQAAAAAAAAAAAAAAAAAAgAAAIgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Interfaces\IRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BookshopApp.Db.IUnitOfWork" Collapsed="true">
+    <Position X="9.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAIAAAABCAAAAAAAAAAACAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Data\Interfaces\IUnitOfWork.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BookshopApp.Db.IUserRepository" Collapsed="true">
+    <Position X="3" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAABAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Interfaces\IUserRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BookshopApp.Models.IEntity&lt;TId&gt;" Collapsed="true">
+    <Position X="14.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="BookshopApp.Models.IEntity" Collapsed="true">
+    <Position X="14.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
